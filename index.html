@@ -48,7 +48,17 @@
     .feature-icon { width: 56px; height: 56px; background: var(--bg-alt); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; }
     .feature h3 { font-size: 18px; margin-bottom: 8px; color: var(--primary); }
     .feature p { font-size: 14px; color: var(--text-muted); }
-    .proof { padding: 60px 0; background: var(--bg-alt); text-align: center; }
+    .comparison { padding: 60px 0; background: var(--bg-alt); }
+    .comparison h2 { font-size: 28px; color: var(--primary); margin-bottom: 32px; text-align: center; }
+    .comparison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+    .comparison-card { background: white; border-radius: 12px; padding: 24px; text-align: center; border: 2px solid var(--border); }
+    .comparison-card.featured { border-color: var(--accent); position: relative; }
+    .comparison-card.featured::after { content: 'US'; position: absolute; top: -12px; right: 16px; background: var(--accent); color: white; font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 4px; }
+    .comparison-card h3 { font-size: 18px; margin-bottom: 12px; }
+    .comparison-card p { font-size: 14px; color: var(--text-muted); }
+    .comparison-card .check { color: #22c55e; font-weight: 600; }
+    .comparison-card .cross { color: #ef4444; font-weight: 600; }
+    .proof { padding: 60px 0; background: var(--bg); text-align: center; }
     .proof-items { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
     .proof-item { font-size: 14px; color: var(--text-muted); }
     .proof-item strong { display: block; font-size: 20px; color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
@@ -60,6 +70,7 @@
     @media (max-width: 768px) {
       .hero h1 { font-size: 36px; }
       .features { grid-template-columns: 1fr; }
+      .comparison-grid { grid-template-columns: 1fr; }
       .proof-items { gap: 24px; }
     }
   </style>
@@ -86,8 +97,30 @@
   <section class="agitation">
     <div class="container">
       <h2>Here's the thing: <span class="highlight">ChatGPT is lying to you.</span></h2>
-      <p>It sounds confident. It sounds smart. But it's been proven to get <strong>90% of exam answers wrong</strong>.</p>
+      <p>It sounds confident. It sounds smart. But research shows AI chatbots reguarly give wrong answers — they're designed to sound right, not to be right.</p>
       <p>And past papers? They're random. They don't adapt to what you actually need.</p>
+    </div>
+  </section>
+  <section class="comparison">
+    <div class="container">
+      <h2>How We Compare</h2>
+      <div class="comparison-grid">
+        <div class="comparison-card">
+          <h3>ChatGPT</h3>
+          <p class="cross">✗</p>
+          <p>Confident but often wrong. Not exam-specific.</p>
+        </div>
+        <div class="comparison-card">
+          <h3>Quizlet</h3>
+          <p class="cross">✗</p>
+          <p>User-generated content. Not exam-board specific.</p>
+        </div>
+        <div class="comparison-card featured">
+          <h3>ExamPulse</h3>
+          <p class="check">✓</p>
+          <p>Grounded in official GCSE exam specs. Adaptive to YOUR gaps.</p>
+        </div>
+      </div>
     </div>
   </section>
   <section class="solution">
