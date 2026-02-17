@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>What's Your Revision Type? | ExamPulse Quiz</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --accent-hover: #EA580C;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
+    .container { max-width: 640px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 20px 0; border-bottom: 1px solid var(--border); text-align: center; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .hero { padding: 60px 0 40px; text-align: center; }
+    .hero h1 { font-size: 40px; color: var(--primary); margin-bottom: 16px; }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 18px; color: var(--text-muted); }
+    .quiz { padding: 20px 0 60px; }
+    .question { display: none; }
+    .question.active { display: block; }
+    .question h2 { font-size: 22px; margin-bottom: 24px; color: var(--primary); }
+    .options { display: flex; flex-direction: column; gap: 12px; }
+    .option { display: block; padding: 16px 20px; border: 2px solid var(--border); border-radius: 12px; cursor: pointer; transition: all 0.2s; font-size: 16px; background: var(--bg); text-align: left; }
+    .option:hover { border-color: var(--accent); background: #FFF7ED; }
+    .option.selected { border-color: var(--accent); background: #FFF7ED; }
+    .progress { height: 6px; background: var(--border); border-radius: 3px; margin-bottom: 32px; overflow: hidden; }
+    .progress-bar { height: 100%; background: var(--accent); width: 20%; transition: width 0.3s; }
+    .btn { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; padding: 14px 28px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.2s ease; }
+    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .result { display: none; text-align: center; padding: 40px 0; }
+    .result.active { display: block; }
+    .result-emoji { font-size: 64px; margin-bottom: 16px; }
+    .result-type { font-size: 32px; color: var(--primary); margin-bottom: 8px; }
+    .result-sub { font-size: 18px; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
+    .result-desc { font-size: 16px; color: var(--text-muted); margin-bottom: 32px; }
+    .result-problem { background: var(--bg-alt); padding: 20px; border-radius: 12px; margin-bottom: 24px; }
+    .result-problem h3 { font-size: 16px; margin-bottom: 8px; }
+    .result-problem p { font-size: 14px; color: var(--text-muted); }
+    .share { margin-bottom: 32px; }
+    .share-title { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
+    .share-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .share-btn { display: inline-flex; align-items: center; gap: 8px; padding: 10px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 14px; font-weight: 500; cursor: pointer; background: var(--bg); color: var(--text); text-decoration: none; transition: all 0.2s; }
+    .share-btn:hover { border-color: var(--accent); background: #FFF7ED; }
+    .share-text { display: none; margin-top: 12px; padding: 12px; background: var(--bg-alt); border-radius: 8px; font-size: 13px; color: var(--text-muted); }
+    .share-text.show { display: block; }
+    .waitlist { background: var(--primary); color: white; padding: 32px; border-radius: 16px; text-align: center; }
+    .waitlist h3 { font-size: 24px; margin-bottom: 8px; color: white; }
+    .waitlist p { font-size: 14px; color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+    .waitlist input { width: 100%; padding: 14px 16px; border: none; border-radius: 8px; font-size: 16px; margin-bottom: 12px; font-family: 'Inter', sans-serif; }
+    .waitlist .btn { width: 100%; }
+    .footer { text-align: center; padding: 32px 0; border-top: 1px solid var(--border); }
+    .footer p { font-size: 14px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="#" class="logo">Exam<span>Pulse</span></a>
+    </div>
+  </header>
+  <div class="container">
+    <section class="hero">
+      <h1>What's Your <span>Revision Type</span>?</h1>
+      <p>5 questions. 30 seconds. Discover how you really revise.</p>
+    </section>
+    <div class="quiz">
+      <div class="progress"><div class="progress-bar" id="progress"></div></div>
+      <div class="question active" data-q="1">
+        <h2>1. When do you usually start revising?</h2>
+        <div class="options">
+          <button class="option" data-value="planner">Weeks before the exams</button>
+          <button class="option" data-value="crammer">A few days before</button>
+          <button class="option" data-value="improviser">When I feel like it</button>
+        </div>
+      </div>
+      <div class="question" data-q="2">
+        <h2>2. What's your go-to revision method?</h2>
+        <div class="options">
+          <button class="option" data-value="reviewer">Re-reading my notes</button>
+          <button class="option" data-value="practitioner">Past papers</button>
+          <button class="option" data-value="searcher">YouTube and ChatGPT</button>
+        </div>
+      </div>
+      <div class="question" data-q="3">
+        <h2>3. How do you feel about past papers?</h2>
+        <div class="options">
+          <button class="option" data-value="practitioner">I love them — they work</button>
+          <button class="option" data-value="crammer">I hate them, they're boring</button>
+          <button class="option" data-value="improviser">I don't know where to start</button>
+        </div>
+      </div>
+      <div class="question" data-q="4">
+        <h2>4. What's your biggest revision struggle?</h2>
+        <div class="options">
+          <button class="option" data-value="gap-blind">I don't know what to revise</button>
+          <button class="option" data-value="procrastinator">I keep putting it off</button>
+          <button class="option" data-value="confused">The answers don't make sense</button>
+        </div>
+      </div>
+      <div class="question" data-q="5">
+        <h2>5. What's your ideal revision session?</h2>
+        <div class="options">
+          <button class="option" data-value="planner">2 hours, planned out</button>
+          <button class="option" data-value="efficiency">30-minute focused bursts</button>
+          <button class="option" data-value="crammer">All-nighter before the exam</button>
+        </div>
+      </div>
+      <div class="result" id="result">
+        <div class="result-emoji" id="result-emoji">🔥</div>
+        <div class="result-type" id="result-type">The Crammer</div>
+        <div class="result-sub" id="result-sub">High stress, high reward</div>
+        <div class="result-desc" id="result-desc">You thrive under pressure.</div>
+        <div class="result-problem">
+          <h3>The Problem</h3>
+          <p id="result-problem-text">Cramming might get you through, but you're leaving grades on the table.</p>
+        </div>
+        <div class="share">
+          <p class="share-title">Share your result:</p>
+          <div class="share-buttons">
+            <button class="share-btn" id="share-twitter">𝕏 Twitter</button>
+            <button class="share-btn" id="share-copy">📋 Copy</button>
+          </div>
+          <p class="share-text" id="share-text">Copied! Tell your mates.</p>
+        </div>
+        <div class="waitlist">
+          <h3>Get Your Free Gap Analysis</h3>
+          <p>Find out exactly what you need to revise. Join the ExamPulse waitlist.</p>
+          <form id="waitlist-form">
+            <input type="email" placeholder="Your email address" required>
+            <button type="submit" class="btn">Join the Waitlist</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container"><p>ExamPulse — AI-powered GCSE revision</p></div>
+  </footer>
+  <script>
+    const questions = document.querySelectorAll('.question');
+    const result = document.getElementById('result');
+    const progress = document.getElementById('progress');
+    let currentQ = 1;
+    let currentType = {};
+    const answers = {};
+    const archetypes = {
+      'planner': { emoji: '🗓️', name: 'The Planner', sub: 'Organised — but are you targeting the right things?', problem: 'You might be spending time on topics you already know.' },
+      'crammer': { emoji: '🔥', name: 'The Crammer', sub: 'High stress, high reward — but at what cost?', problem: "You're not retaining information long-term. You're not fixing your actual gaps." },
+      'improviser': { emoji: '🎭', name: 'The Improviser', sub: 'Flying by the seat of your pants. Risky.', problem: "Without structure, you're guessing what's on the exam." },
+      'practitioner': { emoji: '🎯', name: 'The Optimizer', sub: "You're already doing it right — mostly.", problem: "You're not getting targeted practice on your actual weaknesses." },
+      'reviewer': { emoji: '📚', name: 'The Reviewer', sub: 'Comfortable with what you know.', problem: 'Re-reading notes is passive. You need active recall.' },
+      'searcher': { emoji: '🔍', name: 'The Searcher', sub: 'The internet is your teacher.', problem: "ChatGPT has been proven to get 90% of exam answers wrong." },
+      'gap-blind': { emoji: '👀', name: 'The Gap-Blind', sub: "You don't know what you don't know.", problem: "Guessing means wasted time on topics that won't improve your grade." },
+      'procrastinator': { emoji: '⏰', name: 'The Procrastinator', sub: "Tomorrow, you'll start.", problem: "The longer you wait, the less time for targeted practice." },
+      'confused': { emoji: '🤔', name: 'The Confused', sub: "You're trying. It's just not clicking.", problem: 'You need explanations that speak YOUR language.' },
+      'efficiency': { emoji: '⚡', name: 'The Efficiency-Focused', sub: 'Short sessions, big results.', problem: "Efficiency only works if you're targeting your actual gaps." }
+    };
+    document.querySelectorAll('.option').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const q = btn.closest('.question').dataset.q;
+        answers[q] = btn.dataset.value;
+        btn.closest('.options').querySelectorAll('.option').forEach(o => o.classList.remove('selected'));
+        btn.classList.add('selected');
+        setTimeout(() => {
+          if (currentQ < 5) {
+            questions[currentQ - 1].classList.remove('active');
+            currentQ++;
+            questions[currentQ - 1].classList.add('active');
+            progress.style.width = (currentQ * 20) + '%';
+          } else { showResult(); }
+        }, 300);
+      });
+    });
+    function showResult() {
+      const counts = {};
+      Object.values(answers).forEach(a => { counts[a] = (counts[a] || 0) + 1; });
+      const top = Object.entries(counts).sort((a,b) => b[1] - a[1])[0][0];
+      currentType = archetypes[top] || archetypes['improviser'];
+      document.getElementById('result-emoji').textContent = currentType.emoji;
+      document.getElementById('result-type').textContent = currentType.name;
+      document.getElementById('result-sub').textContent = currentType.sub;
+      document.getElementById('result-desc').textContent = currentType.name + ' — ' + currentType.sub;
+      document.getElementById('result-problem-text').textContent = currentType.problem;
+      questions[4].classList.remove('active');
+      result.classList.add('active');
+      progress.style.width = '100%';
+    }
+    document.getElementById('share-twitter').addEventListener('click', () => {
+      const text = "I'm " + currentType.name + "! " + currentType.sub + " Find out your Revision Type:";
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
+    });
+    document.getElementById('share-copy').addEventListener('click', () => {
+      const text = "I'm " + currentType.name + "! " + currentType.sub + " Find out your Revision Type:";
+      navigator.clipboard.writeText(text);
+      document.getElementById('share-text').classList.add('show');
+      setTimeout(() => document.getElementById('share-text').classList.remove('show'), 2000);
+    });
+    document.getElementById('waitlist-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thanks! You\'re on the waitlist. We\'ll be in touch soon.');
+    });
+  </script>
+</body>
+</html>
