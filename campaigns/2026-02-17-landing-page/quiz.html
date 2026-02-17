@@ -45,11 +45,13 @@
     .result.active { display: block; }
     .result-emoji { font-size: 64px; margin-bottom: 16px; }
     .result-type { font-size: 32px; color: var(--primary); margin-bottom: 8px; }
-    .result-sub { font-size: 18px; color: var(--accent); font-weight: 600; margin-bottom: 16px; }
-    .result-desc { font-size: 16px; color: var(--text-muted); margin-bottom: 32px; }
-    .result-problem { background: var(--bg-alt); padding: 20px; border-radius: 12px; margin-bottom: 24px; }
+    .result-sub { font-size: 18px; color: var(--accent); font-weight: 600; margin-bottom: 24px; }
+    .result-problem { background: var(--bg-alt); padding: 20px; border-radius: 12px; margin-bottom: 24px; text-align: left; }
     .result-problem h3 { font-size: 16px; margin-bottom: 8px; }
     .result-problem p { font-size: 14px; color: var(--text-muted); }
+    .result-insight { background: #FFF7ED; border-left: 4px solid var(--accent); padding: 16px; border-radius: 0 8px 8px 0; margin-bottom: 24px; text-align: left; }
+    .result-insight h3 { font-size: 14px; color: var(--accent); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .result-insight p { font-size: 14px; color: var(--text); }
     .share { margin-bottom: 32px; }
     .share-title { font-size: 14px; color: var(--text-muted); margin-bottom: 12px; }
     .share-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
@@ -69,7 +71,7 @@
 <body>
   <header>
     <div class="container">
-      <a href="#" class="logo">Exam<span>Pulse</span></a>
+      <a href="index.html" class="logo">Exam<span>Pulse</span></a>
     </div>
   </header>
   <div class="container">
@@ -123,11 +125,17 @@
         <div class="result-emoji" id="result-emoji">🔥</div>
         <div class="result-type" id="result-type">The Crammer</div>
         <div class="result-sub" id="result-sub">High stress, high reward</div>
-        <div class="result-desc" id="result-desc">You thrive under pressure.</div>
+        
         <div class="result-problem">
           <h3>The Problem</h3>
           <p id="result-problem-text">Cramming might get you through, but you're leaving grades on the table.</p>
         </div>
+        
+        <div class="result-insight">
+          <h3>💡 How ExamPulse Helps</h3>
+          <p id="result-insight-text">You'll get targeted practice on your weak spots instead of wasting time on what you already know.</p>
+        </div>
+        
         <div class="share">
           <p class="share-title">Share your result:</p>
           <div class="share-buttons">
@@ -156,18 +164,79 @@
     const progress = document.getElementById('progress');
     let currentQ = 1;
     let currentType = {};
+    let currentInsight = '';
     const answers = {};
     const archetypes = {
-      'planner': { emoji: '🗓️', name: 'The Planner', sub: 'Organised — but are you targeting the right things?', problem: 'You might be spending time on topics you already know.' },
-      'crammer': { emoji: '🔥', name: 'The Crammer', sub: 'High stress, high reward — but at what cost?', problem: "You're not retaining information long-term. You're not fixing your actual gaps." },
-      'improviser': { emoji: '🎭', name: 'The Improviser', sub: 'Flying by the seat of your pants. Risky.', problem: "Without structure, you're guessing what's on the exam." },
-      'practitioner': { emoji: '🎯', name: 'The Optimizer', sub: "You're already doing it right — mostly.", problem: "You're not getting targeted practice on your actual weaknesses." },
-      'reviewer': { emoji: '📚', name: 'The Reviewer', sub: 'Comfortable with what you know.', problem: 'Re-reading notes is passive. You need active recall.' },
-      'searcher': { emoji: '🔍', name: 'The Searcher', sub: 'The internet is your teacher.', problem: "ChatGPT has been proven to get 90% of exam answers wrong." },
-      'gap-blind': { emoji: '👀', name: 'The Gap-Blind', sub: "You don't know what you don't know.", problem: "Guessing means wasted time on topics that won't improve your grade." },
-      'procrastinator': { emoji: '⏰', name: 'The Procrastinator', sub: "Tomorrow, you'll start.", problem: "The longer you wait, the less time for targeted practice." },
-      'confused': { emoji: '🤔', name: 'The Confused', sub: "You're trying. It's just not clicking.", problem: 'You need explanations that speak YOUR language.' },
-      'efficiency': { emoji: '⚡', name: 'The Efficiency-Focused', sub: 'Short sessions, big results.', problem: "Efficiency only works if you're targeting your actual gaps." }
+      'planner': { 
+        emoji: '🗓️', 
+        name: 'The Planner', 
+        sub: 'Organised — but are you targeting the right things?', 
+        problem: 'You might be spending time on topics you already know. The exam board doesn\'t care how much you\'ve revised — they care what you can actually do.',
+        insight: 'ExamPulse identifies your actual weak spots so you stop revising what you already know.'
+      },
+      'crammer': { 
+        emoji: '🔥', 
+        name: 'The Crammer', 
+        sub: 'High stress, high reward — but at what cost?', 
+        problem: "You're not retaining information long-term. And you're definitely not fixing the gaps that actually cost you marks.",
+        insight: 'ExamPulse\'s adaptive questions target your specific knowledge gaps, so you can actually move your grade without pulling all-nighters.'
+      },
+      'improviser': { 
+        emoji: '🎭', 
+        name: 'The Improviser', 
+        sub: 'Flying by the seat of your pants. Risky.', 
+        problem: "Without structure, you're guessing what on earth the exam wants. And guessing means gaps. Gaps mean lower grades.",
+        insight: 'ExamPulse gives you structure — every question is chosen specifically to improve your score.'
+      },
+      'practitioner': { 
+        emoji: '🎯', 
+        name: 'The Optimizer', 
+        sub: "You're already doing it right — mostly.", 
+        problem: "You're doing the same past papers over and over. You're not getting targeted practice on your actual weaknesses.",
+        insight: 'ExamPulse adapts to YOUR mistakes, not generic questions everyone gets wrong.'
+      },
+      'reviewer': { 
+        emoji: '📚', 
+        name: 'The Reviewer', 
+        sub: 'Comfortable with what you know. Avoiding what you don\'t.', 
+        problem: 'Re-reading notes feels like revision. It\'s not. It\'s passive. You need active recall and targeted practice.',
+        insight: 'ExamPulse forces active recall with questions that adapt to what YOU get wrong.'
+      },
+      'searcher': { 
+        emoji: '🔍', 
+        name: 'The Searcher', 
+        sub: 'The internet is your teacher. But is it a good one?', 
+        problem: "ChatGPT has been proven to get 90% of exam answers wrong. Your exams won't.",
+        insight: 'Every answer in ExamPulse is verified against real exam board specifications. No confident wrong answers.'
+      },
+      'gap-blind': { 
+        emoji: '👀', 
+        name: 'The Gap-Blind', 
+        sub: "You don't know what you don't know.", 
+        problem: "This is the most dangerous revision type. You're guessing, and guessing means wasted time on topics that won't improve your grade.",
+        insight: 'ExamPulse reveals your hidden gaps and turns them into a targeted revision plan.'
+      },
+      'procrastinator': { 
+        emoji: '⏰', 
+        name: 'The Procrastinator', 
+        sub: "Tomorrow, you'll start. (You said that last week.)", 
+        problem: "The longer you wait, the less time you have for targeted practice. You're not short on time — you're short on focus.",
+        insight: 'ExamPulse makes every minute count with 30-minute targeted sessions that actually move your grade.'
+      },
+      'confused': { 
+        emoji: '🤔', 
+        name: 'The Confused', 
+        sub: "You're trying. It's just not clicking.", 
+        problem: 'You need explanations that speak YOUR language, not textbook jargon. And you need practice that adapts to YOUR confusion.',
+        insight: 'ExamPulse breaks down topics in the way that makes sense to YOU, based on how you answer.'
+      },
+      'efficiency': { 
+        emoji: '⚡', 
+        name: 'The Efficiency-Focused', 
+        sub: 'Short sessions, big results.', 
+        problem: "Efficiency only works if you're targeting your actual gaps. Otherwise, it's just fast inefficient.",
+        insight: 'ExamPulse optimizes your limited time by targeting exactly what will move your grade.'
+      }
     };
     document.querySelectorAll('.option').forEach(btn => {
       btn.addEventListener('click', () => {
@@ -190,28 +259,35 @@
       Object.values(answers).forEach(a => { counts[a] = (counts[a] || 0) + 1; });
       const top = Object.entries(counts).sort((a,b) => b[1] - a[1])[0][0];
       currentType = archetypes[top] || archetypes['improviser'];
+      currentInsight = currentType.insight;
       document.getElementById('result-emoji').textContent = currentType.emoji;
       document.getElementById('result-type').textContent = currentType.name;
       document.getElementById('result-sub').textContent = currentType.sub;
-      document.getElementById('result-desc').textContent = currentType.name + ' — ' + currentType.sub;
       document.getElementById('result-problem-text').textContent = currentType.problem;
+      document.getElementById('result-insight-text').textContent = currentInsight;
       questions[4].classList.remove('active');
       result.classList.add('active');
       progress.style.width = '100%';
     }
     document.getElementById('share-twitter').addEventListener('click', () => {
-      const text = "I'm " + currentType.name + "! " + currentType.sub + " Find out your Revision Type:";
-      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text), '_blank');
+      const text = "I'm " + currentType.name + "! " + currentType.sub + " Find out YOUR Revision Type:";
+      const url = "https://nickconstantinou.github.io/exam-pulse-marketing/quiz.html";
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(text) + '&url=' + encodeURIComponent(url), '_blank');
     });
     document.getElementById('share-copy').addEventListener('click', () => {
-      const text = "I'm " + currentType.name + "! " + currentType.sub + " Find out your Revision Type:";
+      const text = "I'm " + currentType.name + "! " + currentType.sub + "\n\nFind out YOUR Revision Type: https://nickconstantinou.github.io/exam-pulse-marketing/quiz.html";
       navigator.clipboard.writeText(text);
       document.getElementById('share-text').classList.add('show');
       setTimeout(() => document.getElementById('share-text').classList.remove('show'), 2000);
     });
     document.getElementById('waitlist-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      alert('Thanks! You\'re on the waitlist. We\'ll be in touch soon.');
+      const email = e.target.querySelector('input').value;
+      // Store in localStorage for now (demo purposes)
+      const waitlist = JSON.parse(localStorage.getItem('examPulseWaitlist') || '[]');
+      waitlist.push({ email: email, type: currentType.name, date: new Date().toISOString() });
+      localStorage.setItem('examPulseWaitlist', JSON.stringify(waitlist));
+      alert('Thanks! You\'re on the waitlist. We\'ll be in touch soon.\n\n(Note: Demo mode - emails saved to browser localStorage)');
     });
   </script>
 </body>
