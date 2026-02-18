@@ -3,10 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>ExamPulse - Stop Cramming. Start Understanding.</title>
+  <title>ExamPulse | AI-Powered GCSE Revision</title>
+  <meta name="description" content="AI that adapts to YOUR exam board. Stop wasting time on revision that doesn't work.">
+  
+  <!-- Preconnect for performance -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
       --primary: #0F172A;
@@ -17,171 +21,375 @@
       --text: #1E293B;
       --text-muted: #64748B;
       --border: #E2E8F0;
+      --glass: rgba(255,255,255,0.7);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
-    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
-    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
-    header { padding: 20px 0; border-bottom: 1px solid var(--border); }
-    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+    h1, h2, h3, h4 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    
+    /* Header */
+    header { padding: 20px 0; border-bottom: 1px solid var(--border); position: sticky; top: 0; background: var(--glass); backdrop-filter: blur(10px); z-index: 100; }
+    header .container { display: flex; justify-content: space-between; align-items: center; }
     .logo { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
     .logo span { color: var(--accent); }
-    .hero { padding: 80px 0; text-align: center; background: var(--bg); }
-    .hero h1 { font-size: 56px; color: var(--primary); margin-bottom: 20px; letter-spacing: -1px; }
+    nav a { margin-left: 24px; color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    nav a:hover { color: var(--primary); }
+    
+    /* Hero */
+    .hero { padding: 80px 0; text-align: center; background: linear-gradient(180deg, var(--bg-alt) 0%, var(--bg) 100%); }
+    .hero h1 { font-size: 56px; margin-bottom: 20px; color: var(--primary); }
     .hero h1 span { color: var(--accent); }
-    .hero p { font-size: 20px; color: var(--text-muted); max-width: 540px; margin: 0 auto 36px; }
-    .hero p strong { color: var(--accent); }
-    .btn { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; padding: 16px 36px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.2s ease; }
-    .btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3); }
-    .problem { padding: 60px 0; background: var(--bg-alt); }
-    .problem h2 { font-size: 36px; color: var(--primary); margin-bottom: 24px; }
-    .problem p { font-size: 18px; color: var(--text-muted); max-width: 600px; }
-    .problem p + p { margin-top: 16px; }
-    .solution { padding: 60px 0; background: var(--bg); }
-    .solution h2 { font-size: 32px; color: var(--primary); margin-bottom: 32px; text-align: center; }
-    .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
-    .feature { text-align: center; padding: 16px; }
-    .feature-icon { width: 56px; height: 56px; background: var(--bg-alt); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; }
-    .feature h3 { font-size: 18px; margin-bottom: 8px; color: var(--primary); }
-    .feature p { font-size: 14px; color: var(--text-muted); }
-    .exam-boards { padding: 40px 0; text-align: center; background: var(--primary); color: white; }
-    .exam-boards h3 { color: white; font-size: 20px; margin-bottom: 16px; }
-    .exam-boards p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 20px; }
-    .exam-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
-    .exam-badge { background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; }
-    .agitation { padding: 60px 0; background: var(--bg-alt); }
-    .agitation h2 { font-size: 28px; color: var(--primary); margin-bottom: 16px; }
-    .agitation .highlight { color: var(--accent); }
-    .agitation p { font-size: 16px; color: var(--text-muted); max-width: 600px; }
-    .comparison { padding: 60px 0; background: var(--bg); }
-    .comparison h2 { font-size: 28px; color: var(--primary); margin-bottom: 32px; text-align: center; }
-    .comparison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
-    .comparison-card { background: white; border-radius: 12px; padding: 24px; text-align: center; border: 2px solid var(--border); }
-    .comparison-card.featured { border-color: var(--accent); position: relative; }
-    .comparison-card.featured::after { content: 'US'; position: absolute; top: -12px; right: 16px; background: var(--accent); color: white; font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 4px; }
-    .comparison-card h3 { font-size: 18px; margin-bottom: 12px; }
-    .comparison-card p { font-size: 14px; color: var(--text-muted); }
-    .comparison-card .check { color: #22c55e; font-weight: 600; font-size: 20px; }
-    .comparison-card .cross { color: #ef4444; font-weight: 600; font-size: 20px; }
-    .proof { padding: 40px 0; background: var(--bg-alt); text-align: center; }
-    .proof p { font-size: 16px; color: var(--text-muted); }
-    .proof strong { color: var(--accent); }
-    .cta-section { padding: 80px 0; text-align: center; background: var(--bg); }
-    .cta-section h2 { font-size: 40px; color: var(--primary); margin-bottom: 16px; }
-    .cta-section p { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
+    .hero p { font-size: 20px; color: var(--text-muted); max-width: 600px; margin: 0 auto 32px; }
+    .hero-cta { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; padding: 16px 32px; border-radius: 8px; text-decoration: none; transition: all 0.2s; }
+    .hero-cta:hover { background: var(--accent-hover); transform: translateY(-2px); }
+    .hero-stats { display: flex; justify-content: center; gap: 48px; margin-top: 48px; }
+    .stat { text-align: center; }
+    .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 14px; color: var(--text-muted); }
+    
+    /* Features */
+    .features { padding: 80px 0; background: var(--bg-alt); }
+    .features h2 { font-size: 36px; text-align: center; margin-bottom: 48px; color: var(--primary); }
+    .features-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; }
+    .feature-card { background: white; padding: 32px; border-radius: 12px; border: 1px solid var(--border); }
+    .feature-card h3 { font-size: 20px; margin-bottom: 12px; color: var(--primary); }
+    .feature-card p { font-size: 14px; color: var(--text-muted); }
+    .feature-icon { font-size: 40px; margin-bottom: 16px; }
+    
+    /* Lead Magnet Section - A/B Tested */
+    .lead-magnet { padding: 80px 0; background: var(--primary); color: white; }
+    .lead-magnet h2 { font-size: 36px; text-align: center; margin-bottom: 16px; }
+    .lead-magnet .subtitle { text-align: center; color: rgba(255,255,255,0.7); margin-bottom: 32px; font-size: 18px; }
+    .lead-magnet-card { background: white; border-radius: 16px; padding: 32px; max-width: 500px; margin: 0 auto; color: var(--text); }
+    .lead-magnet-card h3 { font-size: 24px; margin-bottom: 8px; }
+    .lead-magnet-card p { font-size: 14px; color: var(--text-muted); margin-bottom: 20px; }
+    .lead-magnet-card input { width: 100%; padding: 14px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; margin-bottom: 12px; }
+    .lead-magnet-card input:focus { outline: none; border-color: var(--accent); }
+    .lead-magnet-card button { width: 100%; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; padding: 14px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .lead-magnet-card button:hover { background: var(--accent-hover); }
+    .ab-badge { display: inline-block; background: var(--bg-alt); padding: 4px 10px; border-radius: 4px; font-size: 11px; color: var(--text-muted); margin-bottom: 16px; }
+    
+    /* Social Proof */
+    .social-proof { padding: 60px 0; text-align: center; }
+    .social-proof h2 { font-size: 28px; margin-bottom: 32px; color: var(--primary); }
+    .comparison { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
+    .compare-card { background: white; border: 2px solid var(--border); border-radius: 12px; padding: 24px; width: 280px; }
+    .compare-card.winner { border-color: var(--accent); position: relative; }
+    .compare-card.winner::after { content: '✓'; position: absolute; top: -12px; right: -12px; background: var(--accent); color: white; width: 24px; height: 24px; border-radius: 50%; font-size: 14px; display: flex; align-items: center; justify-content: center; }
+    .compare-card h4 { font-size: 18px; margin-bottom: 8px; }
+    .compare-card p { font-size: 13px; color: var(--text-muted); }
+    .compare-card .price { font-size: 24px; font-weight: 700; margin: 12px 0; color: var(--primary); }
+    
+    /* CTA */
+    .cta { padding: 80px 0; text-align: center; background: var(--bg-alt); }
+    .cta h2 { font-size: 40px; margin-bottom: 16px; color: var(--primary); }
+    .cta p { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
+    
+    /* Footer */
     footer { padding: 32px 0; border-top: 1px solid var(--border); text-align: center; }
     footer p { font-size: 14px; color: var(--text-muted); }
+    
+    /* Responsive */
     @media (max-width: 768px) {
       .hero h1 { font-size: 36px; }
-      .features { grid-template-columns: 1fr; }
-      .comparison-grid { grid-template-columns: 1fr; }
+      .hero-stats { flex-direction: column; gap: 24px; }
+      .comparison { flex-direction: column; align-items: center; }
     }
   </style>
 </head>
 <body>
   <header>
-    <div class="container header-inner">
-      <a href="#" class="logo">Exam<span>Pulse</span></a>
+    <div class="container">
+      <a href="index.html" class="logo">Exam<span>Pulse</span></a>
+      <nav>
+        <a href="#features">Features</a>
+        <a href="#pricing">Pricing</a>
+        <a href="blog.html">Blog</a>
+      </nav>
     </div>
   </header>
+
   <section class="hero">
     <div class="container">
-      <h1>Stop Cramming.<br>Start <span>Understanding</span>.</h1>
-      <p><strong>AI revision tuned to YOUR exam board.</strong><br>Select AQA, OCR, Edexcel or WJEC — we adapt to YOUR syllabus.</p>
-      <a href="quiz.html" class="btn">Find My Revision Type</a>
-      <p style="margin-top: 16px; font-size: 14px; color: var(--text-muted);">2,000+ students already joined the waitlist</p>
-    </div>
-  </section>
-  <section class="problem">
-    <div class="container">
-      <h2>You've been revising for hours. But your grades? Still the same.</h2>
-      <p>Everyone else is wasting time on topics they already know. You're playing guess-what-the-examiner-wants.</p>
-    </div>
-  </section>
-  <section class="solution">
-    <div class="container">
-      <h2>AI That Actually Knows Your Exam</h2>
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon">📋</div>
-          <h3>Your Exam Board</h3>
-          <p>Choose AQA, OCR, Edexcel or WJEC. We adapt to YOUR syllabus.</p>
+      <h1>Your GCSE Revision Is<br><span>Broken</span></h1>
+      <p>ChatGPT gives you wrong answers. Past papers don't tell you what to focus on. ExamPulse adapts to YOUR exam board and targets YOUR gaps.</p>
+      <a href="#" class="hero-cta" id="heroCta">Find Your Weaknesses →</a>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-value">AQA, OCR, Edexcel</div>
+          <div class="stat-label">All UK Exam Boards</div>
         </div>
-        <div class="feature">
+        <div class="stat">
+          <div class="stat-value">AI-Powered</div>
+          <div class="stat-label">Adapts to Your Level</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value">Free</div>
+          <div class="stat-label">To Start</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Why ExamPulse Works</h2>
+      <div class="features-grid">
+        <div class="feature-card">
           <div class="feature-icon">🎯</div>
-          <h3>Knows The Spec</h3>
-          <p>Every question grounded in official exam specifications.</p>
+          <h3>Know Your Gaps</h3>
+          <p>Our AI identifies exactly what you don't know based on your exam board's syllabus.</p>
         </div>
-        <div class="feature">
+        <div class="feature-card">
           <div class="feature-icon">🧠</div>
-          <h3>Adapts to You</h3>
-          <p>AI learns YOUR weak spots, not everyone else's.</p>
+          <h3>Spaced Repetition</h3>
+          <p>Algorithms show you topics at the right time to maximize long-term retention.</p>
         </div>
-        <div class="feature">
+        <div class="feature-card">
           <div class="feature-icon">✓</div>
-          <h3>Answers You Can Trust</h3>
-          <p>No more guessing. Every answer verified against real past papers.</p>
+          <h3>Verified Content</h3>
+          <p>Every answer checked against official exam board specifications. No hallucinations.</p>
         </div>
       </div>
     </div>
   </section>
-  <section class="exam-boards">
+
+  <!-- A/B Tested Lead Magnet -->
+  <section class="lead-magnet">
     <div class="container">
-      <h3>Supported Exam Boards</h3>
-      <p>We cover the full syllabus for all major UK exam boards.</p>
-      <div class="exam-badges">
-        <span class="exam-badge">AQA</span>
-        <span class="exam-badge">OCR</span>
-        <span class="exam-badge">Edexcel</span>
-        <span class="exam-badge">WJEC</span>
-        <span class="exam-badge">CCEA</span>
+      <h2 id="lmTitle">Take the Quiz</h2>
+      <p class="subtitle" id="lmSubtitle">Find out your revision type in 2 minutes</p>
+      <div class="lead-magnet-card">
+        <span class="ab-badge" id="abBadge">Quiz</span>
+        <h3 id="lmCardTitle">What's Your Revision Style?</h3>
+        <p id="lmCardDesc">Answer 5 questions to discover how you learn best and get a personalized study plan.</p>
+        <form id="leadForm" onsubmit="handleLeadSubmit(event)">
+          <input type="email" id="leadEmail" placeholder="Your email" required>
+          <button type="submit" id="lmBtn">Get My Results →</button>
+        </form>
+        <p style="font-size: 12px; color: var(--text-muted); margin-top: 12px; text-align: center;" id="lmPrivacy">No spam. Unsubscribe anytime.</p>
       </div>
     </div>
   </section>
-  <section class="agitation">
-    <div class="container">
-      <h2>Why generic AI <span class="highlight">doesn't work</span> for exams:</h2>
-      <p>ChatGPT sounds confident but regularly gives wrong answers — it's designed to sound right, not to be right. And apps like Quizlet? Their content is user-generated, not matched to YOUR exam board.</p>
-    </div>
-  </section>
-  <section class="comparison">
+
+  <section class="social-proof" id="pricing">
     <div class="container">
       <h2>How We Compare</h2>
-      <div class="comparison-grid">
-        <div class="comparison-card">
-          <h3>ChatGPT</h3>
-          <p class="cross">✗</p>
-          <p>Confident but wrong. Not exam-specific.</p>
+      <div class="comparison">
+        <div class="compare-card">
+          <h4>ChatGPT</h4>
+          <p>AI chatbot - gives wrong answers on specific exam topics</p>
+          <div class="price">Free</div>
+          <p>❌ Not exam-specific</p>
         </div>
-        <div class="comparison-card">
-          <h3>Quizlet</h3>
-          <p class="cross">✗</p>
-          <p>User-generated. Not exam-board specific.</p>
+        <div class="compare-card">
+          <h4>Quizlet</h4>
+          <p>User-generated flashcards - not verified for accuracy</p>
+          <div class="price">$12/mo</div>
+          <p>⚠️ Variable quality</p>
         </div>
-        <div class="comparison-card featured">
-          <h3>ExamPulse</h3>
-          <p class="check">✓</p>
-          <p>Your exam board. Your syllabus. Adaptive.</p>
+        <div class="compare-card winner">
+          <h4>ExamPulse</h4>
+          <p>AI that knows YOUR exam board syllabus</p>
+          <div class="price">Free</div>
+          <p>✅ Verified content</p>
         </div>
       </div>
     </div>
   </section>
-  <section class="proof">
+
+  <section class="cta">
     <div class="container">
-      <p><strong>2,000+ students</strong> already waiting. Join them.</p>
+      <h2>Ready to Work Smarter?</h2>
+      <p>Join students getting better grades with less stress.</p>
+      <a href="#" class="hero-cta">Start Free →</a>
     </div>
   </section>
-  <section class="cta-section">
-    <div class="container">
-      <h2>Start revising smarter.</h2>
-      <p>Take the 30-second quiz to discover YOUR revision type.</p>
-      <a href="quiz.html" class="btn">Take the Quiz</a>
-    </div>
-  </section>
+
   <footer>
     <div class="container">
-      <p>ExamPulse — AI-powered GCSE revision that actually works.</p>
+      <p>ExamPulse — AI-powered GCSE revision</p>
     </div>
   </footer>
+
+  <script>
+    // ============================================
+    // A/B Testing & Analytics System
+    // ============================================
+    
+    const ANALYTICS_KEY = 'examPulse_analytics';
+    const AB_TEST_KEY = 'examPulse_ab_variant';
+    
+    // Lead magnet variants for A/B testing
+    const leadMagnets = [
+      {
+        id: 'quiz',
+        title: 'Take the Quiz',
+        subtitle: 'Find out your revision type in 2 minutes',
+        cardTitle: "What's Your Revision Style?",
+        cardDesc: 'Answer 5 questions to discover how you learn best and get a personalized study plan.',
+        badge: 'Quiz',
+        btn: 'Get My Results →',
+        privacy: 'No spam. Unsubscribe anytime.'
+      },
+      {
+        id: 'grade-calc',
+        title: 'Calculate Your Path',
+        subtitle: 'See what you need for your target grade',
+        cardTitle: 'GCSE Grade Calculator',
+        cardDesc: 'Find out exactly what grades you need in your remaining exams to hit your target.',
+        badge: 'Calculator',
+        btn: 'Calculate My Grade →',
+        privacy: 'No spam. Totally free.'
+      },
+      {
+        id: 'gap-diagnostic',
+        title: 'Find Your Gaps',
+        subtitle: 'Get a personalized gap analysis',
+        cardTitle: 'GCSE Gap Diagnostic',
+        cardDesc: 'In 2 minutes, discover exactly which topics are costing you marks.',
+        badge: 'Gap Analysis',
+        btn: 'Find My Gaps →',
+        privacy: 'No spam. Instant results.'
+      }
+    ];
+    
+    // Get or assign A/B variant
+    function getVariant() {
+      let variant = localStorage.getItem(AB_TEST_KEY);
+      if (!variant) {
+        // Randomly assign variant (weighted: quiz gets more traffic initially)
+        const rand = Math.random();
+        if (rand < 0.5) variant = 'quiz';
+        else if (rand < 0.75) variant = 'grade-calc';
+        else variant = 'gap-diagnostic';
+        localStorage.setItem(AB_TEST_KEY, variant);
+      }
+      return variant;
+    }
+    
+    // Apply variant to page
+    function applyVariant() {
+      const variant = getVariant();
+      const config = leadMagnets.find(m => m.id === variant) || leadMagnets[0];
+      
+      document.getElementById('lmTitle').textContent = config.title;
+      document.getElementById('lmSubtitle').textContent = config.subtitle;
+      document.getElementById('lmCardTitle').textContent = config.cardTitle;
+      document.getElementById('lmCardDesc').textContent = config.cardDesc;
+      document.getElementById('abBadge').textContent = config.badge;
+      document.getElementById('lmBtn').textContent = config.btn;
+      document.getElementById('lmPrivacy').textContent = config.privacy;
+      
+      // Track impression
+      trackEvent('lead_magnet_impression', { variant });
+      
+      return config;
+    }
+    
+    // Analytics tracking
+    function trackEvent(eventName, data = {}) {
+      const analytics = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '{}');
+      
+      if (!analytics.events) analytics.events = [];
+      analytics.events.push({
+        name: eventName,
+        data,
+        timestamp: new Date().toISOString(),
+        url: window.location.href
+      });
+      
+      // Keep only last 1000 events
+      if (analytics.events.length > 1000) {
+        analytics.events = analytics.events.slice(-1000);
+      }
+      
+      localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+      
+      // Also log to console for debugging
+      console.log('[Analytics]', eventName, data);
+    }
+    
+    // Handle lead form submission
+    function handleLeadSubmit(e) {
+      e.preventDefault();
+      const email = document.getElementById('leadEmail').value;
+      const variant = getVariant();
+      
+      // Store lead
+      const analytics = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '{}');
+      if (!analytics.leads) analytics.leads = [];
+      analytics.leads.push({
+        email,
+        variant,
+        timestamp: new Date().toISOString()
+      });
+      localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+      
+      // Track conversion
+      trackEvent('lead_captured', { variant, email: email.substring(0, 3) + '***' });
+      
+      // Show success
+      alert('Thanks! Check your inbox for your ' + variant.replace('-', ' ') + '.');
+      document.getElementById('leadForm').reset();
+    }
+    
+    // Track CTA clicks
+    document.getElementById('heroCta')?.addEventListener('click', function(e) {
+      e.preventDefault();
+      trackEvent('hero_cta_click', { variant: getVariant() });
+      // Scroll to lead magnet
+      document.querySelector('.lead-magnet').scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    // Track page views
+    trackEvent('page_view', { 
+      path: window.location.pathname,
+      variant: getVariant() 
+    });
+    
+    // Initialize on load
+    document.addEventListener('DOMContentLoaded', applyVariant);
+    
+    // Expose analytics for admin viewing
+    window.examPulseAnalytics = {
+      getStats: function() {
+        const analytics = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '{}');
+        const variant = getVariant();
+        
+        const events = analytics.events || [];
+        const leads = analytics.leads || [];
+        
+        const impressions = events.filter(e => e.name === 'lead_magnet_impression').length;
+        const conversions = events.filter(e => e.name === 'lead_captured').length;
+        const ctaClicks = events.filter(e => e.name === 'hero_cta_click').length;
+        
+        // Count by variant
+        const byVariant = {};
+        leadMagnets.forEach(m => {
+          const imp = events.filter(e => e.name === 'lead_magnet_impression' && e.data.variant === m.id).length;
+          const conv = leads.filter(l => l.variant === m.id).length;
+          byVariant[m.id] = { impressions: imp, conversions: conv, rate: imp > 0 ? ((conv/imp)*100).toFixed(1) + '%' : '0%' };
+        });
+        
+        return {
+          variant,
+          totalImpressions: impressions,
+          totalConversions: conversions,
+          conversionRate: impressions > 0 ? ((conversions/impressions)*100).toFixed(1) + '%' : '0%',
+          ctaClicks,
+          byVariant,
+          leads: leads.length
+        };
+      },
+      
+      // Admin: view in console
+      consoleReport: function() {
+        console.table(this.getStats().byVariant);
+        console.log('Full stats:', this.getStats());
+      }
+    };
+  </script>
 </body>
 </html>

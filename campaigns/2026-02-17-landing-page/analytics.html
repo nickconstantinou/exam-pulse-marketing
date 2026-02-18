@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ExamPulse Analytics</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+      --success: #22C55E;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); padding: 24px; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .container { max-width: 900px; margin: 0 auto; }
+    header { margin-bottom: 32px; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 24px; color: var(--primary); }
+    .logo span { color: var(--accent); }
+    .back { color: var(--text-muted); text-decoration: none; font-size: 14px; display: inline-block; margin-bottom: 16px; }
+    .back:hover { color: var(--primary); }
+    
+    .card { background: white; border-radius: 12px; padding: 24px; margin-bottom: 24px; border: 1px solid var(--border); }
+    .card h2 { font-size: 20px; margin-bottom: 16px; }
+    
+    .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 16px; margin-bottom: 24px; }
+    .stat { background: var(--bg-alt); padding: 16px; border-radius: 8px; text-align: center; }
+    .stat-value { font-family: 'Space Grotesk', sans-serif; font-size: 32px; font-weight: 700; color: var(--primary); }
+    .stat-label { font-size: 12px; color: var(--text-muted); margin-top: 4px; }
+    
+    table { width: 100%; border-collapse: collapse; }
+    th, td { text-align: left; padding: 12px; border-bottom: 1px solid var(--border); font-size: 14px; }
+    th { font-weight: 600; color: var(--text-muted); font-size: 12px; text-transform: uppercase; }
+    td { font-family: 'Space Grotesk', sans-serif; }
+    .variant-tag { display: inline-block; background: var(--bg-alt); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-family: 'Inter', sans-serif; }
+    .rate { color: var(--success); font-weight: 600; }
+    
+    .empty { text-align: center; padding: 48px; color: var(--text-muted); }
+    .empty-icon { font-size: 48px; margin-bottom: 16px; }
+    
+    .refresh { display: inline-block; background: var(--accent); color: white; font-size: 14px; padding: 8px 16px; border-radius: 6px; text-decoration: none; cursor: pointer; border: none; }
+    .refresh:hover { background: #EA580C; }
+    
+    .export { background: var(--bg-alt); color: var(--text); font-size: 14px; padding: 8px 16px; border-radius: 6px; text-decoration: none; border: 1px solid var(--border); cursor: pointer; margin-left: 8px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <a href="index.html" class="back">← Back to Landing Page</a>
+      <div class="logo">Exam<span>Pulse</span> Analytics</div>
+    </header>
+    
+    <div class="card">
+      <h2>Your Variant</h2>
+      <p style="color: var(--text-muted); font-size: 14px;">The lead magnet variant currently shown to you:</p>
+      <p id="myVariant" style="font-size: 24px; font-weight: 700; color: var(--accent); margin-top: 8px;">-</p>
+    </div>
+    
+    <div class="card">
+      <h2>Overview</h2>
+      <div class="stats-grid">
+        <div class="stat">
+          <div class="stat-value" id="totalImpressions">-</div>
+          <div class="stat-label">Total Impressions</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="totalConversions">-</div>
+          <div class="stat-label">Leads Captured</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="conversionRate">-</div>
+          <div class="stat-label">Conversion Rate</div>
+        </div>
+        <div class="stat">
+          <div class="stat-value" id="ctaClicks">-</div>
+          <div class="stat-label">CTA Clicks</div>
+        </div>
+      </div>
+      <button class="refresh" onclick="loadAnalytics()">Refresh</button>
+      <button class="export" onclick="exportData()">Export CSV</button>
+    </div>
+    
+    <div class="card">
+      <h2>A/B Test Results</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Variant</th>
+            <th>Impressions</th>
+            <th>Conversions</th>
+            <th>Rate</th>
+          </tr>
+        </thead>
+        <tbody id="variantTable">
+          <tr><td colspan="4" class="empty">Loading...</td></tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <div class="card">
+      <h2>Recent Leads</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Variant</th>
+            <th>Date</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody id="leadsTable">
+          <tr><td colspan="3" class="empty">No leads yet</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  
+  <script>
+    const ANALYTICS_KEY = 'examPulse_analytics';
+    const AB_TEST_KEY = 'examPulse_ab_variant';
+    
+    function loadAnalytics() {
+      const analytics = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '{}');
+      const myVariant = localStorage.getItem(AB_TEST_KEY) || 'quiz';
+      
+      const events = analytics.events || [];
+      const leads = analytics.leads || [];
+      
+      const impressions = events.filter(e => e.name === 'lead_magnet_impression').length;
+      const conversions = leads.length;
+      const ctaClicks = events.filter(e => e.name === 'hero_cta_click').length;
+      
+      document.getElementById('myVariant').textContent = myVariant.replace('-', ' ');
+      document.getElementById('totalImpressions').textContent = impressions;
+      document.getElementById('totalConversions').textContent = conversions;
+      document.getElementById('conversionRate').textContent = impressions > 0 ? ((conversions/impressions)*100).toFixed(1) + '%' : '0%';
+      document.getElementById('ctaClicks').textContent = ctaClicks;
+      
+      // Variant table
+      const variants = ['quiz', 'grade-calc', 'gap-diagnostic'];
+      const variantNames = { 'quiz': 'Revision Quiz', 'grade-calc': 'Grade Calculator', 'gap-diagnostic': 'Gap Diagnostic' };
+      
+      let tableHTML = '';
+      variants.forEach(v => {
+        const imp = events.filter(e => e.name === 'lead_magnet_impression' && e.data?.variant === v).length;
+        const conv = leads.filter(l => l.variant === v).length;
+        const rate = imp > 0 ? ((conv/imp)*100).toFixed(1) + '%' : '0%';
+        const isWinning = imp > 0 && conv > 0 && conv/imp === Math.max(...variants.map(vv => {
+          const i = events.filter(e => e.name === 'lead_magnet_impression' && e.data?.variant === vv).length;
+          const c = leads.filter(l => l.variant === vv).length;
+          return i > 0 ? c/i : 0;
+        }));
+        
+        tableHTML += `
+          <tr>
+            <td><span class="variant-tag">${variantNames[v]}</span> ${v === myVariant ? '(you)' : ''}</td>
+            <td>${imp}</td>
+            <td>${conv}</td>
+            <td class="rate">${rate}</td>
+          </tr>
+        `;
+      });
+      document.getElementById('variantTable').innerHTML = tableHTML || '<tr><td colspan="4" class="empty">No data yet</td></tr>';
+      
+      // Leads table
+      const recentLeads = leads.slice(-10).reverse();
+      let leadsHTML = '';
+      recentLeads.forEach(l => {
+        const date = new Date(l.timestamp).toLocaleDateString();
+        leadsHTML += `
+          <tr>
+            <td><span class="variant-tag">${variantNames[l.variant] || l.variant}</span></td>
+            <td>${date}</td>
+            <td>${l.email}</td>
+          </tr>
+        `;
+      });
+      document.getElementById('leadsTable').innerHTML = leadsHTML || '<tr><td colspan="3" class="empty">No leads yet</td></tr>';
+    }
+    
+    function exportData() {
+      const analytics = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '{}');
+      const leads = analytics.leads || [];
+      
+      let csv = 'Variant,Email,Date\n';
+      leads.forEach(l => {
+        csv += `${l.variant},${l.email},${l.timestamp}\n`;
+      });
+      
+      const blob = new Blob([csv], { type: 'text/csv' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'exam-pulse-leads-' + new Date().toISOString().split('T')[0] + '.csv';
+      a.click();
+    }
+    
+    loadAnalytics();
+  </script>
+</body>
+</html>
