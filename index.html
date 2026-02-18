@@ -30,25 +30,30 @@
     .hero h1 { font-size: 56px; color: var(--primary); margin-bottom: 20px; letter-spacing: -1px; }
     .hero h1 span { color: var(--accent); }
     .hero p { font-size: 20px; color: var(--text-muted); max-width: 540px; margin: 0 auto 36px; }
+    .hero p strong { color: var(--accent); }
     .btn { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 18px; font-weight: 600; padding: 16px 36px; border: none; border-radius: 8px; cursor: pointer; text-decoration: none; transition: all 0.2s ease; }
     .btn:hover { background: var(--accent-hover); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(249, 115, 22, 0.3); }
-    .problem { padding: 80px 0; background: var(--bg-alt); }
+    .problem { padding: 60px 0; background: var(--bg-alt); }
     .problem h2 { font-size: 36px; color: var(--primary); margin-bottom: 24px; }
     .problem p { font-size: 18px; color: var(--text-muted); max-width: 600px; }
     .problem p + p { margin-top: 16px; }
-    .agitation { padding: 80px 0; background: var(--primary); color: white; }
-    .agitation h2 { font-size: 36px; margin-bottom: 24px; color: white; }
-    .agitation .highlight { color: var(--accent); font-weight: 600; }
-    .agitation p { font-size: 18px; color: rgba(255,255,255,0.8); max-width: 600px; }
-    .agitation p + p { margin-top: 16px; }
-    .solution { padding: 80px 0; background: var(--bg); }
-    .solution h2 { font-size: 36px; color: var(--primary); margin-bottom: 40px; text-align: center; }
+    .solution { padding: 60px 0; background: var(--bg); }
+    .solution h2 { font-size: 32px; color: var(--primary); margin-bottom: 32px; text-align: center; }
     .features { display: grid; grid-template-columns: repeat(2, 1fr); gap: 32px; }
     .feature { text-align: center; padding: 16px; }
     .feature-icon { width: 56px; height: 56px; background: var(--bg-alt); border-radius: 12px; display: flex; align-items: center; justify-content: center; margin: 0 auto 16px; font-size: 24px; }
     .feature h3 { font-size: 18px; margin-bottom: 8px; color: var(--primary); }
     .feature p { font-size: 14px; color: var(--text-muted); }
-    .comparison { padding: 60px 0; background: var(--bg-alt); }
+    .exam-boards { padding: 40px 0; text-align: center; background: var(--primary); color: white; }
+    .exam-boards h3 { color: white; font-size: 20px; margin-bottom: 16px; }
+    .exam-boards p { color: rgba(255,255,255,0.7); font-size: 14px; margin-bottom: 20px; }
+    .exam-badges { display: flex; justify-content: center; gap: 12px; flex-wrap: wrap; }
+    .exam-badge { background: rgba(255,255,255,0.1); padding: 8px 16px; border-radius: 6px; font-size: 14px; font-weight: 600; }
+    .agitation { padding: 60px 0; background: var(--bg-alt); }
+    .agitation h2 { font-size: 28px; color: var(--primary); margin-bottom: 16px; }
+    .agitation .highlight { color: var(--accent); }
+    .agitation p { font-size: 16px; color: var(--text-muted); max-width: 600px; }
+    .comparison { padding: 60px 0; background: var(--bg); }
     .comparison h2 { font-size: 28px; color: var(--primary); margin-bottom: 32px; text-align: center; }
     .comparison-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
     .comparison-card { background: white; border-radius: 12px; padding: 24px; text-align: center; border: 2px solid var(--border); }
@@ -56,12 +61,11 @@
     .comparison-card.featured::after { content: 'US'; position: absolute; top: -12px; right: 16px; background: var(--accent); color: white; font-size: 12px; font-weight: 600; padding: 4px 8px; border-radius: 4px; }
     .comparison-card h3 { font-size: 18px; margin-bottom: 12px; }
     .comparison-card p { font-size: 14px; color: var(--text-muted); }
-    .comparison-card .check { color: #22c55e; font-weight: 600; }
-    .comparison-card .cross { color: #ef4444; font-weight: 600; }
-    .proof { padding: 60px 0; background: var(--bg); text-align: center; }
-    .proof-items { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
-    .proof-item { font-size: 14px; color: var(--text-muted); }
-    .proof-item strong { display: block; font-size: 20px; color: var(--accent); font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .comparison-card .check { color: #22c55e; font-weight: 600; font-size: 20px; }
+    .comparison-card .cross { color: #ef4444; font-weight: 600; font-size: 20px; }
+    .proof { padding: 40px 0; background: var(--bg-alt); text-align: center; }
+    .proof p { font-size: 16px; color: var(--text-muted); }
+    .proof strong { color: var(--accent); }
     .cta-section { padding: 80px 0; text-align: center; background: var(--bg); }
     .cta-section h2 { font-size: 40px; color: var(--primary); margin-bottom: 16px; }
     .cta-section p { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
@@ -71,7 +75,6 @@
       .hero h1 { font-size: 36px; }
       .features { grid-template-columns: 1fr; }
       .comparison-grid { grid-template-columns: 1fr; }
-      .proof-items { gap: 24px; }
     }
   </style>
 </head>
@@ -84,8 +87,9 @@
   <section class="hero">
     <div class="container">
       <h1>Stop Cramming.<br>Start <span>Understanding</span>.</h1>
-      <p>AI that knows YOUR gaps. Not just any revision — revision that actually moves your grades.</p>
+      <p><strong>AI revision tuned to YOUR exam board.</strong><br>Select AQA, OCR, Edexcel or WJEC — we adapt to YOUR syllabus.</p>
       <a href="quiz.html" class="btn">Find My Revision Type</a>
+      <p style="margin-top: 16px; font-size: 14px; color: var(--text-muted);">2,000+ students already joined the waitlist</p>
     </div>
   </section>
   <section class="problem">
@@ -94,11 +98,50 @@
       <p>Everyone else is wasting time on topics they already know. You're playing guess-what-the-examiner-wants.</p>
     </div>
   </section>
+  <section class="solution">
+    <div class="container">
+      <h2>AI That Actually Knows Your Exam</h2>
+      <div class="features">
+        <div class="feature">
+          <div class="feature-icon">📋</div>
+          <h3>Your Exam Board</h3>
+          <p>Choose AQA, OCR, Edexcel or WJEC. We adapt to YOUR syllabus.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Knows The Spec</h3>
+          <p>Every question grounded in official exam specifications.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🧠</div>
+          <h3>Adapts to You</h3>
+          <p>AI learns YOUR weak spots, not everyone else's.</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">✓</div>
+          <h3>Answers You Can Trust</h3>
+          <p>No more guessing. Every answer verified against real past papers.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+  <section class="exam-boards">
+    <div class="container">
+      <h3>Supported Exam Boards</h3>
+      <p>We cover the full syllabus for all major UK exam boards.</p>
+      <div class="exam-badges">
+        <span class="exam-badge">AQA</span>
+        <span class="exam-badge">OCR</span>
+        <span class="exam-badge">Edexcel</span>
+        <span class="exam-badge">WJEC</span>
+        <span class="exam-badge">CCEA</span>
+      </div>
+    </div>
+  </section>
   <section class="agitation">
     <div class="container">
-      <h2>Here's the thing: <span class="highlight">ChatGPT is lying to you.</span></h2>
-      <p>It sounds confident. It sounds smart. But research shows AI chatbots reguarly give wrong answers — they're designed to sound right, not to be right.</p>
-      <p>And past papers? They're random. They don't adapt to what you actually need.</p>
+      <h2>Why generic AI <span class="highlight">doesn't work</span> for exams:</h2>
+      <p>ChatGPT sounds confident but regularly gives wrong answers — it's designed to sound right, not to be right. And apps like Quizlet? Their content is user-generated, not matched to YOUR exam board.</p>
     </div>
   </section>
   <section class="comparison">
@@ -108,74 +151,30 @@
         <div class="comparison-card">
           <h3>ChatGPT</h3>
           <p class="cross">✗</p>
-          <p>Confident but often wrong. Not exam-specific.</p>
+          <p>Confident but wrong. Not exam-specific.</p>
         </div>
         <div class="comparison-card">
           <h3>Quizlet</h3>
           <p class="cross">✗</p>
-          <p>User-generated content. Not exam-board specific.</p>
+          <p>User-generated. Not exam-board specific.</p>
         </div>
         <div class="comparison-card featured">
           <h3>ExamPulse</h3>
           <p class="check">✓</p>
-          <p>Grounded in official GCSE exam specs. Adaptive to YOUR gaps.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section class="solution">
-    <div class="container">
-      <h2>ExamPulse finds YOUR gaps.</h2>
-      <div class="features">
-        <div class="feature">
-          <div class="feature-icon">📋</div>
-          <h3>Grounded in Exam Specs</h3>
-          <p>Every question based on official GCSE exam board specifications</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🎯</div>
-          <h3>Knows Exam Boards</h3>
-          <p>Trained on real GCSE past papers from all major exam boards</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">🧠</div>
-          <h3>Adapts to You</h3>
-          <p>AI that learns YOUR weak spots, not everyone else's</p>
-        </div>
-        <div class="feature">
-          <div class="feature-icon">✓</div>
-          <h3>Answers You Can Trust</h3>
-          <p>Accurate, verifiable answers. No more guessing.</p>
+          <p>Your exam board. Your syllabus. Adaptive.</p>
         </div>
       </div>
     </div>
   </section>
   <section class="proof">
     <div class="container">
-      <div class="proof-items">
-        <div class="proof-item">
-          <strong>Exam Board Specs</strong>
-          Grounded in official specifications
-        </div>
-        <div class="proof-item">
-          <strong>Real Past Papers</strong>
-          Based on actual GCSE content
-        </div>
-        <div class="proof-item">
-          <strong>Adaptive</strong>
-          Questions change based on YOUR progress
-        </div>
-        <div class="proof-item">
-          <strong>Free to Try</strong>
-          No credit card required
-        </div>
-      </div>
+      <p><strong>2,000+ students</strong> already waiting. Join them.</p>
     </div>
   </section>
   <section class="cta-section">
     <div class="container">
-      <h2>Stop guessing. Start improving.</h2>
-      <p>Join thousands of students who are revising smarter, not harder.</p>
+      <h2>Start revising smarter.</h2>
+      <p>Take the 30-second quiz to discover YOUR revision type.</p>
       <a href="quiz.html" class="btn">Take the Quiz</a>
     </div>
   </section>
