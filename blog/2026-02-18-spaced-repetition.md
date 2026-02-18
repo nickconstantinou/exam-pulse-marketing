@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Spaced Repetition: The Science Behind Effective Revision | ExamPulse Blog</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.7; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.3; }
+    .container { max-width: 720px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 32px 0; border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .back-link { display: inline-block; margin-bottom: 24px; color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    .back-link:hover { color: var(--accent); }
+    .meta { font-size: 14px; color: var(--text-muted); margin-bottom: 8px; }
+    h1 { font-size: 36px; margin-bottom: 16px; color: var(--primary); }
+    .subtitle { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
+    .tags { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 32px; }
+    .tag { background: var(--bg-alt); padding: 4px 12px; border-radius: 4px; font-size: 12px; color: var(--text-muted); }
+    .content { font-size: 16px; }
+    .content h2 { font-size: 24px; margin: 40px 0 16px; color: var(--primary); }
+    .content h3 { font-size: 18px; margin: 24px 0 12px; color: var(--primary); }
+    .content p { margin-bottom: 16px; }
+    .content ul, .content ol { margin-bottom: 16px; padding-left: 24px; }
+    .content li { margin-bottom: 8px; }
+    .highlight { background: #FFF7ED; padding: 2px 6px; border-radius: 4px; }
+    .key-insight { background: var(--bg-alt); border-left: 4px solid var(--accent); padding: 16px 20px; margin: 24px 0; border-radius: 0 8px 8px 0; }
+    .key-insight h3 { margin-top: 0; font-size: 16px; }
+    .source { background: var(--bg-alt); padding: 16px; border-radius: 8px; margin: 24px 0; font-size: 14px; }
+    .source a { color: var(--accent); }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 60px; }
+    footer p { font-size: 14px; color: var(--text-muted); }
+    @media (max-width: 768px) {
+      h1 { font-size: 28px; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="../blog.html" class="logo">Exam<span>Pulse</span> Blog</a>
+    </div>
+  </header>
+  <div class="container">
+    <article class="content">
+      <p class="meta">February 18, 2026 • Study Science • ~6 min read</p>
+      <h1>Spaced Repetition: The Science Behind Effective Revision</h1>
+      <p class="subtitle">Why reviewing material at increasing intervals beats cramming every time.</p>
+      <div class="tags">
+        <span class="tag">Study Science</span>
+        <span class="tag">Revision Tips</span>
+        <span class="tag">Memory</span>
+        <span class="tag">GCSE</span>
+      </div>
+
+      <p>We've all been there — the night before an exam, frantically cramming information into our brains. It feels productive at the time, but research shows this "massed practice" is one of the least effective ways to learn.</p>
+
+      <p>Enter <strong>spaced repetition</strong> — a learning technique backed by decades of cognitive science that's proven to dramatically improve long-term retention.</p>
+
+      <h2>What Is Spaced Repetition?</h2>
+
+      <p>Spaced repetition involves reviewing material at increasing intervals over time. Instead of studying something once and moving on, you revisit it multiple times, with each review spaced further apart:</p>
+
+      <ul>
+        <li>Day 1: Learn new topic</li>
+        <li>Day 2: First review</li>
+        <li>Day 4: Second review</li>
+        <li>Day 7: Third review</li>
+        <li>Day 14: Fourth review</li>
+      </ul>
+
+      <p>This might feel counterintuitive — surely more practice in one session would work better? But the science says otherwise.</p>
+
+      <h2>The Forgetting Curve</h2>
+
+      <p>German psychologist Hermann Ebbinghaus discovered the "forgetting curve" in 1885. He found that without reinforcement, we forget approximately <strong>70% of new information within 24 hours</strong>.</p>
+
+      <p>However, each time you successfully recall information, the memory becomes stronger and lasts longer. Spaced repetition exploits this by scheduling reviews just before you're likely to forget — maximizing the learning effect.</p>
+
+      <div class="key-insight">
+        <h3>🎯 The Sweet Spot</h3>
+        <p>Research shows the optimal gap between reviews increases by approximately 2.5x each time. For GCSE students, this means topics you struggle with get reviewed more frequently, while mastered topics fade into longer intervals automatically.</p>
+      </div>
+
+      <h2>Why It Works</h2>
+
+      <h3>1. Active Recall</h3>
+      <p>Spaced repetition forces your brain to actively retrieve information rather than passively re-reading. This "retrieval practice" strengthens neural pathways more than passive review.</p>
+
+      <h3>2. Desirable Difficulty</h3>
+      <p>Forgetting something and then remembering it creates more durable learning than effortlessly recalling it. The "struggle" is where the learning happens.</p>
+
+      <h3>3. Efficient Use of Time</h3>
+      <p>Studies consistently show spaced repetition produces better results with <strong>less total study time</strong> than cramming. You're not wasting time on material you already know well.</p>
+
+      <h2>How to Apply It to GCSE Revision</h2>
+
+      <h3>Start Early</h3>
+      <p>Spaced repetition requires time to work. Don't wait until Easter — begin spaced reviewing from the start of Year 10 or September of Year 11.</p>
+
+      <h3>Use Flashcards</h3>
+      <p>Physical or digital flashcards are perfect for spaced repetition. Apps like Anki use sophisticated algorithms to schedule reviews automatically.</p>
+
+      <h3>Focus on Weak Spots</h3>
+      <p>The beauty of spaced repetition is it naturally allocates more time to topics you find difficult. Don't fight this — it's exactly what you need.</p>
+
+      <h2>The ExamPulse Approach</h2>
+
+      <p>ExamPulse uses spaced repetition algorithms automatically. When you practice with our AI:</p>
+
+      <ul>
+        <li>Topics you get wrong appear more frequently</li>
+        <li>Topics you master fade to longer intervals</li>
+        <li>You study smarter, not harder</li>
+      </ul>
+
+      <div class="key-insight">
+        <h3>Ready to Try It?</h3>
+        <p>Stop cramming. Start spacing. Your future self will thank you.</p>
+      </div>
+
+      <h2>References</h2>
+      <ul>
+        <li>Ebbinghaus, H. (1885). <em>Memory: A Contribution to Experimental Psychology</em></li>
+        <li>Cepeda, N. J., et al. (2006). Distributed practice in verbal recall tasks. <em>Psychological Bulletin</em></li>
+        <li>Karpicke, J. D., & Roediger, H. L. (2008). The critical importance of retrieval for learning. <em>Science</em></li>
+      </ul>
+
+    </article>
+  </div>
+  <footer>
+    <div class="container">
+      <p>ExamPulse Blog — Science-backed revision tips for GCSE success.</p>
+    </div>
+  </footer>
+</body>
+</html>
