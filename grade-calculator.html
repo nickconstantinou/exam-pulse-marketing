@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Grade Calculator | ExamPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; line-height: 1.2; }
+    .container { max-width: 600px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 24px 0; border-bottom: 1px solid var(--border); }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 20px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    .back-link { display: inline-block; margin: 24px 0; color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    .back-link:hover { color: var(--accent); }
+    .hero { text-align: center; padding: 60px 0; }
+    .hero h1 { font-size: 36px; margin-bottom: 16px; color: var(--primary); }
+    .hero p { font-size: 18px; color: var(--text-muted); margin-bottom: 32px; }
+    .calculator { background: var(--bg-alt); padding: 32px; border-radius: 16px; margin-bottom: 32px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+    .form-group select, .form-group input { width: 100%; padding: 12px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 16px; font-family: inherit; }
+    .form-group select:focus, .form-group input:focus { outline: none; border-color: var(--accent); }
+    .btn { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; padding: 14px 28px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; width: 100%; }
+    .btn:hover { background: #EA580C; }
+    .result { background: var(--primary); color: white; padding: 32px; border-radius: 16px; text-align: center; margin-top: 24px; display: none; }
+    .result.show { display: block; }
+    .result h2 { color: white; font-size: 48px; margin-bottom: 8px; }
+    .result p { opacity: 0.8; }
+    .result .insight { background: rgba(255,255,255,0.1); padding: 16px; border-radius: 8px; margin-top: 16px; font-size: 14px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 40px; }
+    footer p { font-size: 14px; color: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <a href="index.html" class="logo">Exam<span>Pulse</span></a>
+    </div>
+  </header>
+
+  <div class="container">
+    <a href="index.html" class="back-link">← Back to ExamPulse</a>
+    
+    <div class="hero">
+      <h1>📊 Calculate Your Potential</h1>
+      <p>See what grades you could achieve with smarter revision.</p>
+    </div>
+
+    <div class="calculator">
+      <div class="form-group">
+        <label>Current Grade (approx)</label>
+        <select id="current-grade">
+          <option value="">Select your current grade</option>
+          <option value="1">1 - Below Expected</option>
+          <option value="2">2 - Approaching</option>
+          <option value="3">3 - Working Towards</option>
+          <option value="4">4 - Baseline</option>
+          <option value="5">5 - Strong</option>
+          <option value="6">6 - Exceeding</option>
+          <option value="7">7 - Outstanding</option>
+          <option value="8">8 - Exceptional</option>
+          <option value="9">9 - Perfect</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>How many hours do you revise per week?</label>
+        <select id="hours">
+          <option value="">Select hours per week</option>
+          <option value="0">Less than 1 hour</option>
+          <option value="1">1-2 hours</option>
+          <option value="3">3-5 hours</option>
+          <option value="7">7-10 hours</option>
+          <option value="12">10+ hours</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label>Exam Board</label>
+        <select id="board">
+          <option value="">Select your exam board</option>
+          <option value="aqa">AQA</option>
+          <option value="ocr">OCR</option>
+          <option value="edexcel">Edexcel</option>
+          <option value="wjec">WJEC</option>
+        </select>
+      </div>
+
+      <button class="btn" onclick="calculatePotential()">Calculate My Potential</button>
+    </div>
+
+    <div class="result" id="result">
+      <p>With smarter revision, you could achieve</p>
+      <h2 id="potential-grade">Grade 7</h2>
+      <p id="potential-label">That's up to 2 grades higher!</p>
+      <div class="insight">
+        <strong>ExamPulse Tip:</strong> Students who use adaptive AI practice see an average improvement of 1.5 grades. The key is practicing questions at your exact level.
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>ExamPulse — AI-powered GCSE revision that actually works.</p>
+    </div>
+  </footer>
+
+  <script>
+    function calculatePotential() {
+      const grade = parseInt(document.getElementById('current-grade').value);
+      const hours = parseInt(document.getElementById('hours').value);
+      const board = document.getElementById('board').value;
+      
+      if (!grade || !hours || !board) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      // Simple algorithm: more hours = more potential
+      let potential = grade;
+      if (hours >= 10) potential = Math.min(9, grade + 2);
+      else if (hours >= 7) potential = Math.min(9, grade + 2);
+      else if (hours >= 3) potential = Math.min(9, grade + 1);
+      else potential = grade;
+      
+      const diff = potential - grade;
+      document.getElementById('potential-grade').textContent = 'Grade ' + potential;
+      document.getElementById('potential-label').textContent = diff > 0 
+        ? `That's up to ${diff} grade${diff > 1 ? 's' : ''} higher!`
+        : 'Keep pushing!';
+      
+      document.getElementById('result').classList.add('show');
+      
+      // Track in PostHog
+      if (typeof posthog !== 'undefined') {
+        posthog.capture('grade_calculated', { currentGrade: grade, potential, hours });
+      }
+    }
+  </script>
+</body>
+</html>
