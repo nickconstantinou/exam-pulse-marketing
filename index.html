@@ -177,7 +177,7 @@
   <section class="cta-section">
     <div class="container">
       <h2>Start revising smarter.</h2>
-      <p>Take the 30-second quiz to discover YOUR revision type.</p>
+      <p id="cta-subtitle">Take the 30-second quiz to discover YOUR revision type.</p>
       <a href="quiz.html" class="btn">Take the Quiz</a>
     </div>
   </section>
@@ -186,5 +186,57 @@
       <p>ExamPulse — AI-powered GCSE revision that actually works.</p>
     </div>
   </footer>
+
+  <script>
+    // A/B Testing: Lead Magnet Variants
+    const AB_TEST_KEY = 'examPulse_ab_variant';
+    
+    const leadMagnets = [
+      { id: 'quiz', title: 'Find My Revision Type', subtitle: 'Take the 30-second quiz to discover YOUR revision type.', url: 'quiz.html' },
+      { id: 'grade-calc', title: 'Calculate Your Potential', subtitle: 'See what grades you could achieve with better revision.', url: 'quiz.html?variant=grade' },
+      { id: 'gap-diagnostic', title: 'Find Your Gaps', subtitle: 'Identify exactly what you don\'t know and fill the gaps.', url: 'quiz.html?variant=gap' }
+    ];
+    
+    function getVariant() {
+      let variant = localStorage.getItem(AB_TEST_KEY);
+      if (!variant) {
+        const rand = Math.random();
+        if (rand < 0.5) variant = 'quiz';
+        else if (rand < 0.75) variant = 'grade-calc';
+        else variant = 'gap-diagnostic';
+        localStorage.setItem(AB_TEST_KEY, variant);
+      }
+      return variant;
+    }
+    
+    function applyVariant() {
+      const variant = getVariant();
+      const config = leadMagnets.find(m => m.id === variant) || leadMagnets[0];
+      
+      // Update hero CTA
+      const heroBtn = document.querySelector('.hero .btn');
+      if (heroBtn) {
+        heroBtn.textContent = config.title;
+        heroBtn.href = config.url;
+      }
+      
+      // Update CTA section
+      const ctaBtn = document.querySelector('.cta-section .btn');
+      const ctaText = document.getElementById('cta-subtitle');
+      if (ctaBtn) {
+        ctaBtn.textContent = config.title;
+        ctaBtn.href = config.url;
+      }
+      if (ctaText) {
+        ctaText.textContent = config.subtitle;
+      }
+      
+      // Log for analytics
+      console.log('A/B Variant:', variant, config);
+    }
+    
+    // Apply on load
+    document.addEventListener('DOMContentLoaded', applyVariant);
+  </script>
 </body>
 </html>
