@@ -237,6 +237,25 @@
     
     // Apply on load
     document.addEventListener('DOMContentLoaded', applyVariant);
+    
+    // PostHog Analytics (if available)
+    if (typeof posthog !== 'undefined') {
+      const variant = getVariant();
+      posthog.capture('ab_variant_shown', { variant });
+      
+      // Track CTA clicks
+      document.querySelectorAll('.btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+          posthog.capture('cta_clicked', { variant, url: btn.href });
+        });
+      });
+    }
+  </script>
+  
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){return function(t,e){if(e.charAt(0)!="_"){e._i=[],e._i={};var o,n=0;n++,(o={}).snapshot=e,s(e),t("init",[i],o),t("start",[o])}}(n=function(t){return function(){return t("capture",Array.prototype.slice.call(arguments))}},e),t("get_distinct_id"),t("identify"),t("register"),t("registerCallback"),t("get_properties"),t("set_person_properties")}(),t.loadJS=function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://cdn.jsdelivr.net/npm/posthog-js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)},e.__SV=!0)}(window,document,window.posthog||[]);
+    posthog.init('phc_IdAZHvksJADiN0p8Cm7H73jh5NT6oQaoYfUgaPPRB28', { api_host: 'https://app.posthog.com' });
   </script>
 </body>
 </html>
