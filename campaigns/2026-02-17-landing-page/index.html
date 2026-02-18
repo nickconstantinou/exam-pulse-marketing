@@ -213,6 +213,16 @@
     </div>
   </footer>
 
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}p=t.createElement("script"),p.type="text/javascript",p.src="https://app.posthog.com/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:e="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==e&&(e+="."+t),u[e]||(u[e]=function(){u[e].q||(u[e].q=[]),u[e].q.push(arguments)}),u[e]},u.people.toString=function(){return u.people.join("-")},o="capture identify alias setConfig segment".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+    
+    posthog.init('phc_IdAZHvksJADiN0p8Cm7H73jh5NT6oQaoYfUgaPPRB28', {
+      api_host: 'https://app.posthog.com',
+      autocapture: true
+    });
+  </script>
+
   <script>
     // ============================================
     // A/B Testing & Analytics System
@@ -290,6 +300,7 @@
     
     // Analytics tracking
     function trackEvent(eventName, data = {}) {
+      // Store locally
       const analytics = JSON.parse(localStorage.getItem(ANALYTICS_KEY) || '{}');
       
       if (!analytics.events) analytics.events = [];
@@ -306,6 +317,11 @@
       }
       
       localStorage.setItem(ANALYTICS_KEY, JSON.stringify(analytics));
+      
+      // Also send to PostHog
+      if (window.posthog) {
+        posthog.capture(eventName, data);
+      }
       
       // Also log to console for debugging
       console.log('[Analytics]', eventName, data);
