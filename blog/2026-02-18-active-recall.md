@@ -150,8 +150,8 @@
 
       <h2>References</h2>
       <ul>
-        <li>Karpicke, J. D., & Roediger, H. L. (2008). The critical importance of retrieval for learning. <em>Science</em></li>
-        <li>Brown, P. C., Roediger, H. L., & McDaniel, M. A. (2014). <em>Make It Stick: The Science of Successful Learning</em></li>
+        <li><a href="https://en.wikipedia.org/wiki/Active_recall" target="_blank">Active Recall - Wikipedia</a></li>
+        <li><a href="https://www.apa.org/education/college/learning-retention" target="_blank">The Science of Learning - APA</a></li>
       </ul>
 
     </article>

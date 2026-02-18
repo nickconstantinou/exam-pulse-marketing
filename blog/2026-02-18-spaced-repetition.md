@@ -135,9 +135,9 @@
 
       <h2>References</h2>
       <ul>
-        <li>Ebbinghaus, H. (1885). <em>Memory: A Contribution to Experimental Psychology</em></li>
+        <li>Ebbinghaus, H. (1885). <em>Memory: A Contribution to Experimental Psychology</em> (available via archive.org)</li>
         <li>Cepeda, N. J., et al. (2006). Distributed practice in verbal recall tasks. <em>Psychological Bulletin</em></li>
-        <li>Karpicke, J. D., & Roediger, H. L. (2008). The critical importance of retrieval for learning. <em>Science</em></li>
+        <li><a href="https://en.wikipedia.org/wiki/Spaced_repetition" target="_blank">Spaced Repetition - Wikipedia</a></li>
       </ul>
 
     </article>
