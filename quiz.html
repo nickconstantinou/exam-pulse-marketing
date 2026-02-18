@@ -269,68 +269,9 @@
       result.classList.add('active');
       progress.style.width = '100%';
     }
-    // Track variant source for analytics
-    const urlParams = new URLSearchParams(window.location.search);
-    const variant = urlParams.get('variant') || localStorage.getItem('examPulse_ab_variant') || 'quiz';
-    
-    // Customize messaging based on A/B variant
-    const variantMessages = {
-      'grade': {
-        headline: 'Calculate Your Potential',
-        subtitle: "See what grades you could achieve with better revision.",
-        insight: "You'll get a grade prediction based on your actual knowledge gaps."
-      },
-      'gap': {
-        headline: 'Find Your Gaps',
-        subtitle: "Identify exactly what you don't know and fill the gaps.",
-        insight: "We'll identify your exact knowledge gaps and create a targeted revision plan."
-      },
-      'quiz': {
-        headline: 'The Crammer',
-        subtitle: 'High stress, high reward',
-        insight: "You'll get targeted practice on your weak spots instead of wasting time on what you already know."
-      }
-    };
-    
-    // Apply variant messaging after results show
-    function applyVariantMessaging() {
-      const config = variantMessages[variant] || variantMessages['quiz'];
-      
-      const resultType = document.getElementById('result-type');
-      const resultSub = document.getElementById('result-sub');
-      const resultInsight = document.getElementById('result-insight-text');
-      
-      if (resultType && config.headline !== 'The Crammer') {
-        resultType.textContent = config.headline;
-        resultSub.textContent = config.subtitle;
-        resultInsight.textContent = config.insight;
-      }
-      
-      // Track in PostHog
-      if (typeof posthog !== 'undefined') {
-        posthog.capture('quiz_completed', { variant });
-      }
-    }
-    
-    // Call after quiz completes
-    const originalShowResult = showResult;
-    if (typeof showResult === 'function') {
-      showResult = function() {
-        originalShowResult.apply(this, arguments);
-        applyVariantMessaging();
-      };
-    }
-    
-    // Also apply on page load if results already shown
-    document.addEventListener('DOMContentLoaded', () => {
-      if (document.getElementById('result-type')) {
-        applyVariantMessaging();
-      }
-    });
-    
-    // Track variant in analytics
+    // Track quiz analytics
     if (typeof posthog !== 'undefined') {
-      posthog.capture('quiz_started', { variant });
+      posthog.capture('quiz_started');
     }
     
     document.getElementById('share-twitter').addEventListener('click', () => {
