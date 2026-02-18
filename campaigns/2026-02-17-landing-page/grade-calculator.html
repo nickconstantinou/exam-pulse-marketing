@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GCSE Grade Calculator | ExamPulse</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; background: var(--bg-alt); color: var(--text); min-height: 100vh; display: flex; align-items: center; justify-content: center; padding: 20px; }
+    .container { max-width: 500px; width: 100%; background: white; border-radius: 16px; padding: 32px; box-shadow: 0 4px 24px rgba(0,0,0,0.08); }
+    h1 { font-family: 'Space Grotesk', sans-serif; font-size: 28px; color: var(--primary); margin-bottom: 8px; text-align: center; }
+    .subtitle { text-align: center; color: var(--text-muted); margin-bottom: 32px; font-size: 14px; }
+    label { display: block; font-size: 14px; font-weight: 600; margin-bottom: 8px; color: var(--primary); }
+    select, input { width: 100%; padding: 12px 16px; border: 2px solid var(--border); border-radius: 8px; font-size: 16px; font-family: 'Inter', sans-serif; margin-bottom: 20px; background: white; }
+    select:focus, input:focus { outline: none; border-color: var(--accent); }
+    .btn { width: 100%; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; padding: 16px; border: none; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+    .btn:hover { background: #EA580C; }
+    .result { display: none; margin-top: 24px; padding: 24px; background: var(--bg-alt); border-radius: 12px; text-align: center; }
+    .result.show { display: block; }
+    .result h2 { font-family: 'Space Grotesk', sans-serif; font-size: 24px; color: var(--primary); margin-bottom: 8px; }
+    .result p { font-size: 14px; color: var(--text-muted); margin-bottom: 16px; }
+    .grade { font-size: 48px; font-family: 'Space Grotesk', sans-serif; font-weight: 700; color: var(--accent); margin-bottom: 16px; }
+    .waitlist { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--border); }
+    .waitlist h3 { font-size: 16px; margin-bottom: 12px; }
+    .waitlist input { margin-bottom: 12px; }
+    .exam-badge { display: inline-block; background: var(--bg-alt); padding: 4px 12px; border-radius: 4px; font-size: 12px; margin: 4px; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 GCSE Grade Calculator</h1>
+    <p class="subtitle">Find out what you need to hit your target grade</p>
+    
+    <label>Exam Board</label>
+    <select id="examBoard">
+      <option value="">Select your exam board</option>
+      <option value="aqa">AQA</option>
+      <option value="ocr">OCR</option>
+      <option value="edexcel">Edexcel</option>
+      <option value="wjec">WJEC</option>
+    </select>
+    
+    <label>Subject</label>
+    <select id="subject">
+      <option value="">Select subject</option>
+      <option value="maths">Maths</option>
+      <option value="english">English</option>
+      <option value="science">Science</option>
+      <option value="history">History</option>
+      <option value="geography">Geography</option>
+    </select>
+    
+    <label>Current Grade (mock exam)</label>
+    <select id="currentGrade">
+      <option value="">Select current grade</option>
+      <option value="1">Grade 1</option>
+      <option value="2">Grade 2</option>
+      <option value="3">Grade 3</option>
+      <option value="4">Grade 4</option>
+      <option value="5">Grade 5</option>
+      <option value="6">Grade 6</option>
+      <option value="7">Grade 7</option>
+      <option value="8">Grade 8</option>
+      <option value="9">Grade 9</option>
+    </select>
+    
+    <label>Target Grade</label>
+    <select id="targetGrade">
+      <option value="">Select target grade</option>
+      <option value="4">Grade 4 (Pass)</option>
+      <option value="5">Grade 5 (Good)</option>
+      <option value="6">Grade 6</option>
+      <option value="7">Grade 7</option>
+      <option value="8">Grade 8</option>
+      <option value="9">Grade 9 (Top)</option>
+    </select>
+    
+    <button class="btn" onclick="calculate()">Calculate My Path</button>
+    
+    <div class="result" id="result">
+      <div class="grade" id="gradeDisplay">5</div>
+      <h2>Topics to Focus On</h2>
+      <p>You need to improve <strong id="topicsNeeded">3</strong> key topics to reach your target.</p>
+      <p>Based on your exam board's most commonly tested areas.</p>
+      
+      <div class="waitlist" id="waitlist">
+        <h3>Get your full gap analysis →</h3>
+        <input type="email" placeholder="Your email" id="email">
+        <button class="btn" onclick="submit()">Send My Analysis</button>
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    function calculate() {
+      const board = document.getElementById('examBoard').value;
+      const subject = document.getElementById('subject').value;
+      const current = parseInt(document.getElementById('currentGrade').value);
+      const target = parseInt(document.getElementById('targetGrade').value);
+      
+      if (!board || !subject || !current || !target) {
+        alert('Please fill in all fields');
+        return;
+      }
+      
+      const gap = target - current;
+      if (gap <= 0) {
+        alert('Target must be higher than current grade!');
+        return;
+      }
+      
+      document.getElementById('gradeDisplay').textContent = target;
+      document.getElementById('topicsNeeded').textContent = Math.min(gap * 2, 10);
+      document.getElementById('result').classList.add('show');
+    }
+    
+    function submit() {
+      const email = document.getElementById('email').value;
+      if (email) {
+        alert('Thanks! Check your inbox for your gap analysis.');
+        document.getElementById('waitlist').innerHTML = '<p style="color: green; text-align: center;">Check your email!</p>';
+      }
+    }
+  </script>
+</body>
+</html>
