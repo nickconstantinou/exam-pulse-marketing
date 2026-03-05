@@ -45,7 +45,11 @@ exam-pulse-marketing/
 ```
 
 ### 2.2 Shared Elements
-- [ ] Update header nav: "Tutors" link + "ExamPulse" logo
+- [ ] **Navigation bar structure:**
+  ```
+  [Logo: ExamPulse]  [Tutors] [FAQ] [Blog] [Join Waitlist]
+  ```
+- [ ] "Tutors" link in header → `/tutors/`
 - [ ] Shared footer with cross-links
 - [ ] Unified styling (or slight variation for tutors section)
 - [ ] Cross-sell CTA in tutor pages: "Need instant revision help? Try ExamPulse"
@@ -142,6 +146,6 @@ exam-pulse-marketing/
 
 ## Next Steps
 
-1. **Approve this plan?** 
+1. **Approve this plan?** ✅ Nick approved: ExamPulse homepage stays, tutors as subsection with nav link
 2. **Content audit** — Start listing existing pages
-3. **Decision:** Replace ExamPulse homepage with tutor directory, or keep ExamPulse as homepage with tutors as section?
+3. **Begin Phase 1** — Audit current UK Tutors content
