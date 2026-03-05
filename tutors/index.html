@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Find verified UK tutors for all subjects and levels. Browse Maths, English, Physics tutors in London, Manchester, Birmingham and more. No fees for parents.">
+  <meta property="og:title" content="UK Tutor Directory | Find the Perfect Tutor">
+  <meta property="og:description" content="Verified UK tutors. All subjects. All levels. No fees for parents. Find your perfect tutor today.">
+  <meta property="og:image" content="https://exampulse.co.uk/images/og-image.png">
+  <meta property="og:url" content="https://exampulse.co.uk/tutors/">
+  <meta property="og:type" content="website">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="UK Tutor Directory | Find the Perfect Tutor">
+  <meta name="twitter:description" content="Verified UK tutors. All subjects. All levels. No fees for parents.">
+  <link rel="canonical" href="https://exampulse.co.uk/tutors/">
+  <title>UK Tutor Directory | Find the Perfect Tutor</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 20px; }
+    nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    nav a:hover { color: var(--accent); }
+    .hero { padding: 80px 0; text-align: center; background: var(--bg); }
+    .hero h1 { font-size: 48px; margin-bottom: 16px; color: var(--primary); }
+    .hero h1 span { color: var(--accent); }
+    .hero p { font-size: 20px; color: var(--text-muted); margin-bottom: 32px; }
+    .search-box { background: white; padding: 24px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); max-width: 800px; margin: 0 auto; }
+    .search-grid { display: grid; grid-template-columns: 1fr 1fr 1fr auto; gap: 12px; }
+    .search-grid select, .search-grid input { padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; width: 100%; }
+    .search-grid select:focus, .search-grid input:focus { outline: none; border-color: var(--accent); }
+    .btn { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; padding: 14px 28px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; }
+    .btn:hover { background: #EA580C; }
+    .btn-outline { background: transparent; border: 2px solid var(--accent); color: var(--accent); }
+    .btn-outline:hover { background: var(--accent); color: white; }
+    .how-it-works { padding: 60px 0; background: var(--bg-alt); }
+    .how-it-works h2 { text-align: center; margin-bottom: 40px; font-size: 32px; }
+    .steps { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; text-align: center; }
+    .step-num { width: 48px; height: 48px; background: var(--accent); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 20px; margin: 0 auto 16px; }
+    .step h3 { font-size: 18px; margin-bottom: 8px; }
+    .step p { font-size: 14px; color: var(--text-muted); }
+    .list-tutor { padding: 60px 0; }
+    .list-tutor h2 { text-align: center; margin-bottom: 16px; font-size: 32px; }
+    .list-tutor p { text-align: center; color: var(--text-muted); margin-bottom: 24px; }
+    .tutors-section { padding: 60px 0; }
+    .tutors-section h2 { margin-bottom: 32px; font-size: 28px; }
+    .tutors-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px; }
+    .tutor-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 20px; transition: all 0.2s; }
+    .tutor-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(0,0,0,0.08); }
+    .tutor-header { display: flex; gap: 16px; margin-bottom: 12px; }
+    .tutor-avatar { width: 56px; height: 56px; background: var(--bg-alt); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; font-weight: 600; color: var(--accent); }
+    .tutor-name { font-weight: 600; font-size: 16px; }
+    .tutor-location { font-size: 13px; color: var(--text-muted); }
+    .tutor-subjects { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px; }
+    .subject-tag { background: var(--bg-alt); padding: 4px 10px; border-radius: 4px; font-size: 12px; color: var(--text-muted); }
+    .tutor-details { display: flex; justify-content: space-between; align-items: center; }
+    .tutor-price { font-size: 18px; font-weight: 700; color: var(--accent); }
+    .tutor-price span { font-size: 13px; color: var(--text-muted); font-weight: 400; }
+    .tutor-rating { font-size: 14px; }
+    .tutor-rating span { color: #F59E0B; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 60px; }
+    footer p { font-size: 14px; color: var(--text-muted); }
+    .no-results { text-align: center; padding: 40px; color: var(--text-muted); }
+    
+    /* ExamPulse cross-sell banner */
+    .exam-pulse-banner { background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%); padding: 40px 0; text-align: center; }
+    .exam-pulse-banner h3 { color: white; font-size: 28px; margin-bottom: 12px; }
+    .exam-pulse-banner p { color: rgba(255,255,255,0.7); margin-bottom: 20px; }
+    .exam-pulse-banner .btn { background: #F97316; }
+    
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 32px; }
+      .search-grid { grid-template-columns: 1fr; }
+      .steps { grid-template-columns: 1fr; }
+    }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "UK Tutor Directory",
+    "url": "https://exampulse.co.uk/tutors/",
+    "description": "Find verified UK tutors for all subjects and levels. No fees for parents.",
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": "https://exampulse.co.uk/tutors/?q={search_term_string}",
+      "query-input": "required name=search_term_string"
+    }
+  }
+  </script>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="../" class="logo">Exam<span>Pulse</span></a>
+      <nav>
+        <a href="../#hero">Home</a>
+        <a href="#search">Find a Tutor</a>
+        <a href="#how-it-works">How It Works</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Find the Perfect <span>Tutor</span> for Your Child</h1>
+      <p>Verified UK tutors. All subjects. All levels. No fees for parents.</p>
+      
+      <div class="search-box" id="search">
+        <form id="search-form">
+          <div class="search-grid">
+            <select id="subject">
+              <option value="">Select Subject</option>
+              <option value="maths">Maths</option>
+              <option value="english">English</option>
+              <option value="physics">Physics</option>
+              <option value="chemistry">Chemistry</option>
+              <option value="biology">Biology</option>
+              <option value="history">History</option>
+              <option value="geography">Geography</option>
+              <option value="french">French</option>
+              <option value="spanish">Spanish</option>
+              <option value="gcse">GCSE</option>
+              <option value="alevel">A-Level</option>
+            </select>
+            <select id="location">
+              <option value="">Select Location</option>
+              <option value="london">London</option>
+              <option value="manchester">Manchester</option>
+              <option value="birmingham">Birmingham</option>
+              <option value="leeds">Leeds</option>
+              <option value="bristol">Bristol</option>
+              <option value="edinburgh">Edinburgh</option>
+              <option value="glasgow">Glasgow</option>
+              <option value="liverpool">Liverpool</option>
+            </select>
+            <select id="level">
+              <option value="">Level</option>
+              <option value="primary">Primary</option>
+              <option value="ks3">KS3</option>
+              <option value="gcse">GCSE</option>
+              <option value="alevel">A-Level</option>
+              <option value="university">University</option>
+            </select>
+            <button type="submit" class="btn">Search</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="how-it-works" id="how-it-works">
+    <div class="container">
+      <h2>How It Works</h2>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <h3>Search</h3>
+          <p>Browse verified tutors by subject, location, and level.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <h3>Compare</h3>
+          <p>View profiles, prices, and ratings. Choose your fit.</p>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <h3>Contact</h3>
+          <p>Connect directly with tutors. No middleman fees.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="tutors-section">
+    <div class="container">
+      <h2>Featured Tutors</h2>
+      <div class="tutors-grid" id="tutors-results">
+        <!-- Tutors loaded via JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ExamPulse Cross-sell Banner -->
+  <section class="exam-pulse-banner">
+    <div class="container">
+      <h3>Need Instant Revision Help?</h3>
+      <p>Try ExamPulse — AI-powered GCSE revision tuned to YOUR exam board.</p>
+      <a href="../quiz.html" class="btn">Take the Quiz</a>
+    </div>
+  </section>
+
+  <section class="list-tutor">
+    <div class="container">
+      <h2>Are You a Tutor?</h2>
+      <p>Join our directory. Get more students. No fees ever.</p>
+      <a href="list.html" class="btn btn-outline">List Your Services</a>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <p>UK Tutors Directory — Part of <a href="../" style="color: var(--accent);">ExamPulse</a>. Find the perfect tutor for your child.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Supabase config
+    const SUPABASE_URL = 'https://araqigsimkjsmwhnjesv.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImFyYXFpZ3NpbWtqc213aG5qZXN2Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzEzNjQ1NjIsImV4cCI6MjA4Njk0MDU2Mn0.UPwIMO3U6qr6DcPvaLqs5sOGnS9WeftbkJa_JYEA4fw';
+
+    let tutors = [];
+
+    // Fetch tutors from Supabase
+    async function fetchTutors() {
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/tutors?select=*`, {
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`
+          }
+        });
+        tutors = await res.json();
+      } catch (e) {
+        console.error('Failed to fetch tutors:', e);
+      }
+    }
+
+    function renderTutors(filtered) {
+      const grid = document.getElementById('tutors-results');
+      if (filtered.length === 0) {
+        grid.innerHTML = '<div class="no-results">No tutors found. Try a different search.</div>';
+        return;
+      }
+      grid.innerHTML = filtered.map(t => `
+        <div class="tutor-card">
+          <div class="tutor-header">
+            <div class="tutor-avatar">${t.name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0,2)}</div>
+            <div>
+              <div class="tutor-name">${t.name} ✓</div>
+              <div class="tutor-location">${t.location}</div>
+            </div>
+          </div>
+          <div class="tutor-subjects">
+            ${(t.subjects || []).map(s => `<span class="subject-tag">${s}</span>`).join('')}
+          </div>
+          <div class="tutor-details">
+            <div class="tutor-price">£${t.price}<span>/hr</span></div>
+            <div class="tutor-rating"><span>★</span> ${t.rating || 'New'} (${t.reviews || 0})</div>
+          </div>
+          <button class="btn" style="margin-top:12px;width:100%" onclick="showContactModal(${t.id}, '${t.name.replace(/'/g, "\\'")}')">Contact Tutor</button>
+        </div>
+      `).join('');
+    }
+
+    // Contact modal
+    if(typeof posthog!=="undefined"){posthog.capture("contact_modal_opened")}
+    function showContactModal(tutorId, tutorName) {
+      const modal = document.createElement('div');
+      modal.id = 'contact-modal';
+      modal.innerHTML = `
+        <div style="position:fixed;inset:0;background:rgba(0,0,0,0.5);display:flex;align-items:center;justify-content:center;z-index:1000" onclick="if(event.target===this)this.remove()">
+          <div style="background:white;padding:32px;border-radius:16px;max-width:400px;width:90%">
+            <h3 style="margin-bottom:16px">Contact ${tutorName}</h3>
+            <p style="color:#64748B;margin-bottom:20px">Fill in your details and we'll forward them to the tutor.</p>
+            <form id="contact-form">
+              <input type="hidden" name="tutor_id" value="${tutorId}">
+              <div style="margin-bottom:16px">
+                <input type="text" name="parent_name" placeholder="Your Name" required style="width:100%;padding:12px;border:1px solid #E2E8F0;border-radius:8px">
+              </div>
+              <div style="margin-bottom:16px">
+                <input type="email" name="parent_email" placeholder="Your Email" required style="width:100%;padding:12px;border:1px solid #E2E8F0;border-radius:8px">
+              </div>
+              <div style="margin-bottom:16px">
+                <input type="text" name="child_subject" placeholder="Subject Needed" required style="width:100%;padding:12px;border:1px solid #E2E8F0;border-radius:8px">
+              </div>
+              <div style="margin-bottom:20px">
+                <textarea name="message" placeholder="Any specific requirements..." style="width:100%;padding:12px;border:1px solid #E2E8F0;border-radius:8px;min-height:80px"></textarea>
+              </div>
+              <button type="submit" class="btn" style="width:100%">Send Request</button>
+            </form>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(modal);
+      
+      document.getElementById('contact-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const formData = new FormData(e.target);
+        const lead = {
+          tutor_id: parseInt(formData.get('tutor_id')),
+          parent_name: formData.get('parent_name'),
+          parent_email: formData.get('parent_email'),
+          child_subject: formData.get('child_subject'),
+          message: formData.get('message'),
+          status: 'pending'
+        };
+        
+        await fetch(`${SUPABASE_URL}/rest/v1/leads`, {
+          method: 'POST',
+          headers: {
+            'apikey': SUPABASE_KEY,
+            'Authorization': `Bearer ${SUPABASE_KEY}`,
+            'Content-Type': 'application/json',
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify(lead)
+        });
+        
+        modal.remove();
+        if(typeof posthog!=="undefined"){posthog.capture("lead_submitted",{tutor_id:lead.tutor_id,subject:lead.child_subject})}
+        alert('Request sent! The tutor will contact you soon.');
+      });
+    }
+
+    // Initial fetch
+    fetchTutors();
+
+    // Search
+    document.getElementById('search-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const subject = document.getElementById('subject').value.toLowerCase();
+      const location = document.getElementById('location').value.toLowerCase();
+      const level = document.getElementById('level').value.toLowerCase();
+      
+      const filtered = tutors.filter(t => {
+        const matchSubject = !subject || (t.subjects || []).some(s => s.toLowerCase().includes(subject));
+        const matchLocation = !location || (t.location || '').toLowerCase().includes(location);
+        const matchLevel = !level || (t.levels || []).some(l => l.toLowerCase().includes(level));
+        return matchSubject && matchLocation && matchLevel;
+      });
+      
+      renderTutors(filtered);
+      if(typeof posthog!=="undefined"){posthog.capture("search_performed",{subject,location,level,resultCount:filtered.length})}
+    });
+  </script>
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var n=document.createElement("script"),s=document.getElementsByTagName("script")[0];
+    n.type="text/javascript",n.async=!0,n.src="//cdn.jsdelivr.net/npm/posthog-js@2/dist/posthog.min.js";
+    s.parentNode.insertBefore(n,s);window.posthog=window.posthog||{};
+    window.posthog.init('phc_IdAZHvksJADiN0p8Cm7H73jh5NT6oQaoYfUgaPPRB28',{api_host:'https://app.posthog.com'});
+  </script>
+</body>
+</html>
