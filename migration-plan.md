@@ -3,23 +3,36 @@
 ## Objective
 Move `uk-tutors-directory` content to a `/tutors/` subsection of `exam-pulse-marketing`, creating a unified site that serves as both a tutor directory and AI revision lead magnet.
 
+**New Domain:** https://exampulse.co.uk (purchased March 2026)
+
 ---
 
 ## Phase 1: Audit & Preparation (Week 1)
 
-### 1.1 Content Audit
-- [ ] List all pages in `uk-tutors-directory` (index, blog posts, etc.)
-- [ ] List all pages in `exam-pulse-marketing`
-- [ ] Identify duplicate/overlapping content
-- [ ] Map URL redirects (critical for SEO)
+### 1.1 Content Audit ✅ COMPLETED
+| UK Tutors (Old) | ExamPulse (Existing) |
+|-----------------|---------------------|
+| index.html | index.html (homepage) |
+| list.html | quiz.html |
+| blog/ | blog.html |
+| sitemap.xml | blog/ |
+| robots.txt | quiz.html |
+| | grade-calculator.html |
+| | gap-diagnostic.html |
 
 ### 1.2 URL Mapping
-| Old URL | New URL |
-|---------|---------|
+| Old URL (github.io) | New URL (exampulse.co.uk) |
+|---------------------|--------------------------|
 | `/` | `/tutors/` |
+| `/list.html` | `/tutors/search` |
 | `/blog/*` | `/tutors/blog/*` |
 | `/faq` | `/tutors/faq` |
-| `/search` | `/tutors/search` |
+| `/sitemap.xml` | `/sitemap.xml` |
+| `/robots.txt` | `/robots.txt` |
+
+**Note:** After migration, set up redirects:
+- `exampulse.co.uk` → `exampulse.co.uk/tutors/` (or keep ExamPulse homepage)
+- Old `uk-tutors-directory` repo: 301 to `exampulse.co.uk/tutors/`
 
 ### 1.3 SEO Preparation
 - [ ] Export all metadata (titles, descriptions) from UK Tutors
@@ -33,15 +46,15 @@ Move `uk-tutors-directory` content to a `/tutors/` subsection of `exam-pulse-mar
 ### 2.1 Site Architecture
 ```
 exam-pulse-marketing/
-├── index.html          # ExamPulse homepage (existing)
+├── index.html          # ExamPulse homepage (existing) @ exampulse.co.uk
 ├── quiz.html           # Lead magnet (existing)
-├── tutors/             # NEW SECTION
+├── tutors/             # NEW SECTION @ exampulse.co.uk/tutors/
 │   ├── index.html      # UK Tutor directory home
-│   ├── search.html    # Tutor search
+│   ├── search.html    # Tutor search (from list.html)
 │   ├── blog/          # Tutor-related blog posts
 │   └── faq.html       # Tutor FAQ
-├── blog/              # ExamPulse blog (existing)
-└── tools/             # Existing tools
+├── blog/              # ExamPulse blog @ exampulse.co.uk/blog
+└── tools/             # Existing tools (quiz, grade calc, etc.)
 ```
 
 ### 2.2 Shared Elements
@@ -109,11 +122,16 @@ exam-pulse-marketing/
 - [ ] Test all redirects
 
 ### 5.2 Launch Checklist
+- [ ] **Custom Domain Setup:**
+  - [ ] Configure DNS in Cloudflare/Namecheap for exampulse.co.uk
+  - [ ] Add CNAME: `www` → `nickconstantinou.github.io`
+  - [ ] Add A record: `@` → 185.199.108.153 (GitHub Pages)
+  - [ ] Enable HTTPS (Let's Encrypt via GitHub Pages)
+  - [ ] Test: https://exampulse.co.uk loads
 - [ ] Full site test (links, forms, CTAs)
 - [ ] Mobile test
 - [ ] Analytics verification
 - [ ] Search Console re-submit
-- [ ] Update GitHub Pages settings if needed
 
 ### 5.3 Post-Launch
 - [ ] Monitor 404s in GSC
