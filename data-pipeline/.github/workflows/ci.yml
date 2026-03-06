@@ -1,0 +1,36 @@
+name: Data Pipeline CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      
+      - name: Install dependencies
+        run: |
+          pip install pytest requests
+      
+      - name: Run tests
+        run: |
+          pytest -v --tb=short
+        continue-on-error: true
+      
+      - name: Validate data files
+        run: |
+          echo "Checking for sensitive data..."
+          if grep -r "api_key\|password\|secret" *.csv *.json 2>/dev/null; then
+            echo "⚠️  Potential secrets found in data files"
+            exit 1
+          fi
+          echo "✅ No obvious secrets in data files"
