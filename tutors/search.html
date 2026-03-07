@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Search verified UK tutors for all subjects and levels. Find Maths, English, Physics tutors in London, Manchester, Birmingham and more.">
+  <meta property="og:title" content="Search Tutors | ExamPulse">
+  <meta property="og:description" content="Find verified UK tutors for all subjects and levels.">
+  <link rel="canonical" href="https://exampulse.co.uk/tutors/search">
+  <title>Search Tutors | ExamPulse</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #0F172A;
+      --accent: #F97316;
+      --bg: #FFFFFF;
+      --bg-alt: #F8FAFC;
+      --text: #1E293B;
+      --text-muted: #64748B;
+      --border: #E2E8F0;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: 'Inter', sans-serif; color: var(--text); background: var(--bg); line-height: 1.6; }
+    h1, h2, h3 { font-family: 'Space Grotesk', sans-serif; font-weight: 700; }
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 24px; }
+    header { padding: 20px 0; border-bottom: 1px solid var(--border); }
+    .header-inner { display: flex; justify-content: space-between; align-items: center; }
+    .logo { font-family: 'Space Grotesk', sans-serif; font-size: 24px; font-weight: 700; color: var(--primary); text-decoration: none; }
+    .logo span { color: var(--accent); }
+    nav { display: flex; gap: 20px; }
+    nav a { color: var(--text-muted); text-decoration: none; font-size: 14px; }
+    nav a:hover, nav a.active { color: var(--accent); }
+    .hero { padding: 60px 0; text-align: center; background: var(--bg-alt); }
+    .hero h1 { font-size: 42px; margin-bottom: 12px; color: var(--primary); }
+    .hero p { font-size: 18px; color: var(--text-muted); }
+    .search-section { padding: 40px 0; }
+    .search-box { background: white; padding: 32px; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.08); }
+    .search-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    .search-grid select, .search-grid input { padding: 14px 16px; border: 1px solid var(--border); border-radius: 8px; font-size: 15px; font-family: inherit; width: 100%; }
+    .search-grid select:focus, .search-grid input:focus { outline: none; border-color: var(--accent); }
+    .btn { display: inline-block; background: var(--accent); color: white; font-family: 'Space Grotesk', sans-serif; font-size: 16px; font-weight: 600; padding: 14px 28px; border-radius: 8px; text-decoration: none; border: none; cursor: pointer; }
+    .btn:hover { background: #EA580C; }
+    .results { padding: 40px 0; }
+    .results-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; }
+    .results-header h2 { font-size: 24px; }
+    .tutor-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; }
+    .tutor-card { background: white; border: 1px solid var(--border); border-radius: 12px; padding: 24px; }
+    .tutor-card:hover { border-color: var(--accent); }
+    .tutor-header { display: flex; gap: 16px; margin-bottom: 16px; }
+    .tutor-avatar { width: 56px; height: 56px; border-radius: 50%; background: var(--bg-alt); display: flex; align-items: center; justify-content: center; font-size: 24px; }
+    .tutor-info h3 { font-size: 18px; margin-bottom: 4px; }
+    .tutor-info .location { font-size: 14px; color: var(--text-muted); }
+    .tutor-subjects { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 12px; }
+    .subject-tag { background: var(--bg-alt); padding: 4px 12px; border-radius: 20px; font-size: 13px; }
+    .tutor-meta { display: flex; justify-content: space-between; align-items: center; padding-top: 12px; border-top: 1px solid var(--border); }
+    .price { font-size: 20px; font-weight: 700; color: var(--primary); }
+    .price span { font-size: 14px; font-weight: 400; color: var(--text-muted); }
+    .verified { display: flex; align-items: center; gap: 4px; font-size: 13px; color: #22C55E; }
+    .empty-state { text-align: center; padding: 60px; color: var(--text-muted); }
+    .empty-state h3 { margin-bottom: 8px; }
+    .cta-banner { background: var(--primary); color: white; padding: 40px; border-radius: 16px; text-align: center; margin: 40px 0; }
+    .cta-banner h2 { color: white; margin-bottom: 12px; }
+    .cta-banner p { color: #94A3B8; margin-bottom: 20px; }
+    footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+    footer p { font-size: 14px; color: var(--text-muted); }
+    @media (max-width: 768px) {
+      .search-grid { grid-template-columns: 1fr 1fr; }
+      .tutor-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">Exam<span>Pulse</span></a>
+      <nav>
+        <a href="/tutors/" class="active">Tutors</a>
+        <a href="#faq">FAQ</a>
+        <a href="/blog.html">Blog</a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Find Your Perfect Tutor</h1>
+      <p>Verified tutors for Maths, English, Science and more. All levels.</p>
+    </div>
+  </section>
+
+  <section class="search-section">
+    <div class="container">
+      <div class="search-box">
+        <form class="search-grid" id="search-form">
+          <select name="subject">
+            <option value="">All Subjects</option>
+            <option value="maths">Maths</option>
+            <option value="english">English</option>
+            <option value="physics">Physics</option>
+            <option value="chemistry">Chemistry</option>
+            <option value="biology">Biology</option>
+          </select>
+          <select name="level">
+            <option value="">All Levels</option>
+            <option value="primary">Primary</option>
+            <option value="ks3">KS3</option>
+            <option value="gcse">GCSE</option>
+            <option value="alevel">A-Level</option>
+          </select>
+          <select name="location">
+            <option value="">All Locations</option>
+            <option value="london">London</option>
+            <option value="manchester">Manchester</option>
+            <option value="birmingham">Birmingham</option>
+            <option value="leeds">Leeds</option>
+            <option value="bristol">Bristol</option>
+          </select>
+          <button type="submit" class="btn">Search</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section class="results">
+    <div class="container">
+      <div class="results-header">
+        <h2 id="results-count">Featured Tutors</h2>
+      </div>
+      <div class="tutor-grid" id="tutor-results">
+        <!-- Sample tutors -->
+        <div class="tutor-card">
+          <div class="tutor-header">
+            <div class="tutor-avatar">👩‍🏫</div>
+            <div class="tutor-info">
+              <h3>Sarah Mitchell</h3>
+              <div class="location">📍 London, SW6</div>
+            </div>
+          </div>
+          <div class="tutor-subjects">
+            <span class="subject-tag">Maths</span>
+            <span class="subject-tag">Physics</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Experienced teacher with 8+ years helping students achieve top grades in GCSE Maths and Physics.</p>
+          <div class="tutor-meta">
+            <div class="price">£45<span>/hr</span></div>
+            <div class="verified">✓ Verified</div>
+          </div>
+        </div>
+        <div class="tutor-card">
+          <div class="tutor-header">
+            <div class="tutor-avatar">👨‍🏫</div>
+            <div class="tutor-info">
+              <h3>James Chen</h3>
+              <div class="location">📍 Manchester, M1</div>
+            </div>
+          </div>
+          <div class="tutor-subjects">
+            <span class="subject-tag">English</span>
+            <span class="subject-tag">Essay Writing</span>
+          </div>
+          <p style="font-size: 14px; color: var(--text-muted); margin-bottom: 12px;">Oxford graduate specialising in English Literature and creative writing. A-Level specialist.</p>
+          <div class="tutor-meta">
+            <div class="price">£50<span>/hr</span></div>
+            <div class="verified">✓ Verified</div>
+          </div>
+        </div>
+      </div>
+      <div class="empty-state" id="no-results" style="display: none;">
+        <h3>No tutors found</h3>
+        <p>Try adjusting your search criteria or browse all tutors.</p>
+      </div>
+    </div>
+  </section>
+
+  <div class="container">
+    <div class="cta-banner">
+      <h2>Need Instant GCSE Revision?</h2>
+      <p>Try ExamPulse — AI-powered revision tuned to YOUR exam board.</p>
+      <a href="/quiz.html" class="btn">Take the Quiz</a>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">
+      <p>UK Tutors — Part of <a href="/" style="color: var(--accent);">ExamPulse</a></p>
+    </div>
+  </footer>
+
+  <!-- PostHog Analytics -->
+  <script>
+    !function(t,e){var o,n,p;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){return function(t,e){if(e.charAt(0)!="_"){e._i=[],e._i={};var o,n=0;n++,(o={}).snapshot=e,s(e),t("init",[i],o),t("start",[o])}}(n=function(t){return function(){return t("capture",Array.prototype.slice.call(arguments))}},e),t("get_distinct_id"),t("identify"),t("register"),t("registerCallback"),t("get_properties"),t("set_person_properties")}(),t.loadJS=function(){var t=document.createElement("script");t.type="text/javascript",t.async=!0,t.src="https://cdn.jsdelivr.net/npm/posthog-js";var e=document.getElementsByTagName("script")[0];e.parentNode.insertBefore(t,e)},e.__SV=!0)}(window,document,window.posthog||[]);
+    posthog.init('phc_IdAZHvksJADiN0p8Cm7H73jh5NT6oQaoYfUgaPPRB28', { api_host: 'https://app.posthog.com' });
+    
+    // Track tutor search
+    document.getElementById('search-form').addEventListener('submit', function() {
+      posthog.capture('tutor_search', {
+        subject: this.subject.value,
+        level: this.level.value,
+        location: this.location.value
+      });
+    });
+  </script>
+</body>
+</html>

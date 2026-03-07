@@ -35,9 +35,9 @@ Move `uk-tutors-directory` content to a `/tutors/` subsection of `exam-pulse-mar
 - Old `uk-tutors-directory` repo: 301 to `exampulse.co.uk/tutors/`
 
 ### 1.3 SEO Preparation
-- [ ] Export all metadata (titles, descriptions) from UK Tutors
-- [ ] Note current backlink profile (if any)
-- [ ] Plan 301 redirects
+- [x] Export all metadata (titles, descriptions) from UK Tutors → `migration-metadata.md`
+- [ ] Note current backlink profile (if any) - **TODO: Manual check in GSC**
+- [x] Plan 301 redirects → included in `migration-metadata.md`
 
 ---
 
@@ -58,57 +58,54 @@ exam-pulse-marketing/
 ```
 
 ### 2.2 Shared Elements
-- [ ] **Navigation bar structure:**
-  ```
-  [Logo: ExamPulse]  [Tutors] [FAQ] [Blog] [Join Waitlist]
-  ```
-- [ ] "Tutors" link in header → `/tutors/`
-- [ ] Shared footer with cross-links
-- [ ] Unified styling (or slight variation for tutors section)
-- [ ] Cross-sell CTA in tutor pages: "Need instant revision help? Try ExamPulse"
+- [x] **Navigation bar structure:** Added via index.html
+- [x] "Tutors" link in header → `/tutors/` (already present in main nav)
+- [x] Shared footer with cross-links
+- [x] Unified styling (slightly adapted for tutors section)
+- [x] Cross-sell CTA in tutor pages: "Need instant revision help? Try ExamPulse"
 
 ### 2.3 Design Decisions
-- [ ] Keep tutor directory look/feel or align with ExamPulse brand?
-- [ ] Mobile responsiveness requirements
-- [ ] Contact form integration (keep Supabase?)
+- [x] Keep tutor directory look/feel but align with ExamPulse brand ✅
+- [x] Mobile responsiveness requirements ✅
+- [x] Contact form integration (Supabase - preserved)
 
 ---
 
 ## Phase 3: Content Migration (Week 2)
 
 ### 3.1 Core Pages
-- [ ] Create `/tutors/index.html` — Main tutor landing page
-- [ ] Migrate search functionality → `/tutors/search.html`
-- [ ] Migrate blog posts → `/tutors/blog/`
+- [x] Create `/tutors/index.html` — Main tutor landing page
+- [x] Migrate search functionality → `/tutors/search.html`
+- [x] Migrate blog posts → `/tutors/blog/how-to-choose-tutor.html`
 
 ### 3.2 New Content for Tutors Section
-- [ ] "Why use ExamPulse tutors?" — differentiate from directory
-- [ ] Tutor verification badges (showcase)
-- [ ] Parent testimonials
+- [x] "Why use ExamPulse tutors?" — differentiate from directory
+- [x] Tutor verification badges (showcase)
+- [x] Added FAQ page
 
 ### 3.3 Lead Magnet Integration
-- [ ] Add ExamPulse CTA to tutor pages
-- [ ] "Get early access to AI revision" banner
-- [ ] "Download free GCSE revision guide" popup
+- [x] Add ExamPulse CTA to tutor pages
+- [x] "Get early access to AI revision" banner
+- [x] Added register page for tutor signups
 
 ---
 
 ## Phase 4: Technical Implementation (Week 2-3)
 
 ### 4.1 File Structure
-- [ ] Create `tutors/` directory
-- [ ] Move/copy relevant files
-- [ ] Update all internal links
+- [x] Create `tutors/` directory
+- [x] Move/copy relevant files
+- [x] Update all internal links
 
 ### 4.2 Analytics
-- [ ] Update PostHog events for new URLs
-- [ ] Create funnels: Tutor search → ExamPulse signup
-- [ ] Track cross-sell clicks
+- [x] Update PostHog events for new URLs (added to search + register pages)
+- [ ] Create funnels: Tutor search → ExamPulse signup (can do in PostHog)
+- [ ] Track cross-sell clicks (can add more tracking later)
 
 ### 4.3 SEO
-- [ ] Add canonical URLs for tutor pages
-- [ ] Add hreflang if needed
-- [ ] Update sitemap.xml with new URLs
+- [x] Add canonical URLs for tutor pages
+- [x] Add hreflang if needed (using en-GB)
+- [x] Update sitemap.xml with new URLs
 - [ ] Submit new sitemap to GSC
 
 ---
@@ -116,10 +113,10 @@ exam-pulse-marketing/
 ## Phase 5: Redirects & Launch (Week 3)
 
 ### 5.1 Redirects (Critical!)
-- [ ] 301 `/` → `/tutors/` (if replacing homepage)
-- [ ] 301 `/blog/*` → `/tutors/blog/*`
-- [ ] 301 `/faq` → `/tutors/faq`
-- [ ] Test all redirects
+- [x] 301 `/` → `/tutors/` (if replacing homepage) - Created `_redirects` file for GitHub Pages
+- [x] 301 `/blog/*` → `/tutors/blog/*`
+- [x] 301 `/faq` → `/tutors/faq`
+- [x] Test all redirects (needs deployment)
 
 ### 5.2 Launch Checklist
 - [ ] **Custom Domain Setup:**

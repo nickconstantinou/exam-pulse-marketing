@@ -25,4 +25,30 @@
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
+  <!-- Tutors Section -->
+  <url>
+    <loc>https://nickconstantinou.github.io/exam-pulse-marketing/tutors/</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+  <url>
+    <loc>https://nickconstantinou.github.io/exam-pulse-marketing/tutors/search</loc>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://nickconstantinou.github.io/exam-pulse-marketing/tutors/faq</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://nickconstantinou.github.io/exam-pulse-marketing/tutors/blog/how-to-choose-tutor</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+  <url>
+    <loc>https://nickconstantinou.github.io/exam-pulse-marketing/tutors/register</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
 </urlset>

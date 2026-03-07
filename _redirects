@@ -1,0 +1,15 @@
+# 301 Redirects for UK Tutors → ExamPulse Migration
+# https://github.com/nickconstantinou/exam-pulse-marketing
+
+# Tutor section redirects
+/uk-tutors-directory/ /tutors/ 301
+/uk-tutors-directory/index.html /tutors/ 301
+/uk-tutors-directory/list.html /tutors/search 301
+/uk-tutors-directory/blog/how-to-choose-tutor.html /tutors/blog/how-to-choose-tutor 301
+/uk-tutors-directory/sitemap.xml /sitemap.xml 301
+/uk-tutors-directory/robots.txt /robots.txt 301
+/uk-tutors-directory/faq /tutors/faq 301
+
+# Also redirect direct .html extensions for cleaner URLs
+/list.html /tutors/search 301
+/blog /blog.html 301
