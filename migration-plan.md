@@ -113,22 +113,14 @@ exam-pulse-marketing/
 ## Phase 5: Redirects & Launch (Week 3)
 
 ### 5.1 Redirects (Critical!)
-- [x] 301 `/` → `/tutors/` (if replacing homepage) - Created `_redirects` file for GitHub Pages
-- [x] 301 `/blog/*` → `/tutors/blog/*`
-- [x] 301 `/faq` → `/tutors/faq`
-- [x] Test all redirects (needs deployment)
+- [x] Redirects not needed - UK Tutors was never live
+- [x] Created `_redirects` file for future reference
 
 ### 5.2 Launch Checklist
-- [ ] **Custom Domain Setup:**
-  - [ ] Configure DNS in Cloudflare/Namecheap for exampulse.co.uk
-  - [ ] Add CNAME: `www` → `nickconstantinou.github.io`
-  - [ ] Add A record: `@` → 185.199.108.153 (GitHub Pages)
-  - [ ] Enable HTTPS (Let's Encrypt via GitHub Pages)
-  - [ ] Test: https://exampulse.co.uk loads
-- [ ] Full site test (links, forms, CTAs)
-- [ ] Mobile test
-- [ ] Analytics verification
-- [ ] Search Console re-submit
+- [x] **Custom Domain:** Already configured ✅
+- [x] Site deployed and live at https://www.exampulse.co.uk
+- [ ] Full site test (links, forms, CTAs) - **Manual test needed**
+- [ ] Mobile test - **Manual test needed**
 
 ### 5.3 Post-Launch
 - [ ] Monitor 404s in GSC
